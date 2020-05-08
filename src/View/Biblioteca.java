@@ -4,18 +4,26 @@
  * and open the template in the editor.
  */
 package View;
-
+import Controller.ConexionBD;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
- * @author Nata
+ * @author Natalia
  */
 public class Biblioteca extends javax.swing.JFrame {
 
+    ConexionBD c = new ConexionBD();
+    Connection con = c.getConexion();
+    
     /**
      * Creates new form insertBook
      */
     public Biblioteca() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -1039,8 +1047,38 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_YearLibroRegistroTxtFieldActionPerformed
 
+    
     private void SaveArticuloRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveArticuloRegistroBtnActionPerformed
-        // TODO add your handling code here:
+
+         try {
+            PreparedStatement pps = con.prepareStatement("INSERT INTO Articulo (ISSN, Titulo, Autor, Nom_revista, Pag_inicio, Pag_fin, Mes, Anio) VALUES (?,?,?,?,?,?,?,?)");
+            if (TituloArticuloRegistroTxtField.getText().equals("") | AutorArticuloRegistroTxtField.getText().equals("") | RevistaArticuloRegistroTxtField.getText().equals("")){
+                System.out.println("Error, ingrese titulo autor y revista");
+            }else{
+                if (PInicioArticuloRegistroTxtField.getText().equals("")) {
+                    
+                Integer.parseInt(PInicioArticuloRegistroTxtField.getText());
+                pps.setString(1, ISSNArticuloRegistroTxtField.getText());
+                pps.setString(2, TituloArticuloRegistroTxtField.getText());
+                pps.setString(3, AutorArticuloRegistroTxtField.getText());
+                pps.setString(4, RevistaArticuloRegistroTxtField.getText());
+                pps.setString(5, PInicioArticuloRegistroTxtField.getText());
+                pps.setString(6, PFinArticuloRegistroTxtField.getText());
+                pps.setString(7, MesArticuloRegistroTxtField.getText());
+                pps.setString(8, YearArticuloRegistroTxtField.getText());
+
+                
+                pps.executeUpdate();        
+                 
+                JOptionPane.showMessageDialog(null, "Datos guardados");
+            }  } 
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+ 
+        
     }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
 
     private void SearchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchComboBoxActionPerformed
