@@ -33,6 +33,7 @@ public class Biblioteca extends javax.swing.JFrame {
         setVisible(true);
         //arreglar metodo createbuttongroup con if para que salga uno u otro
         createButtonGroupBuscar();
+        createButtonGroupAddNota();
         addItemsToArticleComboBox();
         addItemsToBookComboBox();
         addItemsToNotaComboBox();
@@ -48,7 +49,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private void initComponents() {
 
         searchBtnGroup = new javax.swing.ButtonGroup();
-        AddNotaBtnGroup = new javax.swing.ButtonGroup();
+        addNotaBtnGroup = new javax.swing.ButtonGroup();
         chooseTmaNotaBtnGroup = new javax.swing.ButtonGroup();
         PanelGeneral = new javax.swing.JTabbedPane();
         RegistroDeTodo = new javax.swing.JPanel();
@@ -113,9 +114,6 @@ public class Biblioteca extends javax.swing.JFrame {
         ApartadAniadirLibroEnNotasRadioBtn = new javax.swing.JRadioButton();
         ApartadoAniadirArticuloEnNotasRadioBtn = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
-        TemaTecnologiaDeNotaEnNotasRadioBtn = new javax.swing.JRadioButton();
-        TemaHistoriaEnNotaRadioBtn = new javax.swing.JRadioButton();
-        TemaOtroEnNotasRadioBtn = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         createNotaNotasTxtArea = new javax.swing.JTextArea();
         jLabel25 = new javax.swing.JLabel();
@@ -124,6 +122,8 @@ public class Biblioteca extends javax.swing.JFrame {
         createNotaNotasBtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         showLibArtEnNotasTable = new javax.swing.JTable();
+        TemaNotaTxtField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         PanelModificar = new javax.swing.JPanel();
         PanelRegistroArticulo1 = new javax.swing.JPanel();
@@ -146,6 +146,7 @@ public class Biblioteca extends javax.swing.JFrame {
         jTextField38 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         PanelRegistroLibro2 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
@@ -162,6 +163,7 @@ public class Biblioteca extends javax.swing.JFrame {
         jTextField36 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -682,27 +684,30 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel18.setText("¿En qué apartado desea añadirla?");
 
         ApartadAniadirLibroEnNotasRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
+        ApartadAniadirLibroEnNotasRadioBtn.setSelected(true);
         ApartadAniadirLibroEnNotasRadioBtn.setText("Libro");
         ApartadAniadirLibroEnNotasRadioBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ApartadAniadirLibroEnNotasRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApartadAniadirLibroEnNotasRadioBtnActionPerformed(evt);
+            }
+        });
 
         ApartadoAniadirArticuloEnNotasRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
         ApartadoAniadirArticuloEnNotasRadioBtn.setText("Articulo");
+        ApartadoAniadirArticuloEnNotasRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("Elija un tema para su nota");
-
-        TemaTecnologiaDeNotaEnNotasRadioBtn.setText("Tecnologia");
-
-        TemaHistoriaEnNotaRadioBtn.setText("Historia");
-
-        TemaOtroEnNotasRadioBtn.setText("Otro");
 
         createNotaNotasTxtArea.setColumns(20);
         createNotaNotasTxtArea.setRows(5);
         jScrollPane2.setViewportView(createNotaNotasTxtArea);
 
         jLabel25.setText("Busque al que desee añadirla");
-
-        searchPorAtributoEnNotasComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         createNotaNotasBtn.setText("Guardar");
         createNotaNotasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -723,6 +728,14 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         ));
         jScrollPane4.setViewportView(showLibArtEnNotasTable);
+
+        TemaNotaTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TemaNotaTxtFieldActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Modificar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -749,17 +762,17 @@ public class Biblioteca extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TemaTecnologiaDeNotaEnNotasRadioBtn)
-                                    .addComponent(TemaOtroEnNotasRadioBtn)
-                                    .addComponent(TemaHistoriaEnNotaRadioBtn)))
+                            .addComponent(jLabel19)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(createNotaNotasBtn)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(createNotaNotasBtn))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(TemaNotaTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -777,17 +790,15 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(TemaTecnologiaDeNotaEnNotasRadioBtn))
-                        .addGap(15, 15, 15)
-                        .addComponent(TemaHistoriaEnNotaRadioBtn)
-                        .addGap(16, 16, 16)
-                        .addComponent(TemaOtroEnNotasRadioBtn)
+                        .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TemaNotaTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(createNotaNotasBtn))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createNotaNotasBtn)
+                            .addComponent(jButton1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -847,6 +858,8 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jButton8.setText("Modificar");
 
+        jButton2.setText("Eliminar");
+
         javax.swing.GroupLayout PanelRegistroArticulo1Layout = new javax.swing.GroupLayout(PanelRegistroArticulo1);
         PanelRegistroArticulo1.setLayout(PanelRegistroArticulo1Layout);
         PanelRegistroArticulo1Layout.setHorizontalGroup(
@@ -894,9 +907,10 @@ public class Biblioteca extends javax.swing.JFrame {
                                 .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(21, 21, 21))))
+                            .addComponent(jButton2)
+                            .addComponent(jButton4)
+                            .addComponent(jButton8))
+                        .addGap(17, 17, 17))))
         );
         PanelRegistroArticulo1Layout.setVerticalGroup(
             PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -908,15 +922,19 @@ public class Biblioteca extends javax.swing.JFrame {
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel34)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel34)
+                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30)
+                            .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31)
                             .addComponent(jLabel35)
@@ -928,13 +946,15 @@ public class Biblioteca extends javax.swing.JFrame {
                             .addComponent(jLabel36)
                             .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(0, 35, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroArticulo1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addContainerGap())))
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
+                .addContainerGap())
         );
 
         PanelRegistroLibro2.setBackground(new java.awt.Color(153, 153, 255));
@@ -983,6 +1003,8 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jButton9.setText("Modificar");
 
+        jButton3.setText("Eliminar");
+
         javax.swing.GroupLayout PanelRegistroLibro2Layout = new javax.swing.GroupLayout(PanelRegistroLibro2);
         PanelRegistroLibro2.setLayout(PanelRegistroLibro2Layout);
         PanelRegistroLibro2Layout.setHorizontalGroup(
@@ -1005,31 +1027,35 @@ public class Biblioteca extends javax.swing.JFrame {
                                     .addComponent(jTextField32, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel47)
-                            .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLibro2Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(16, 16, 16)))
                         .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(jLabel48)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel49)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(26, Short.MAX_VALUE))
                             .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel50)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLibro2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(54, 54, 54))
+                                .addGap(94, 94, 94))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelRegistroLibro2Layout.createSequentialGroup()
+                                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                            .addGap(29, 29, 29)
+                                            .addComponent(jLabel48)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel49)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton9)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jButton7)))
+                                .addContainerGap(20, Short.MAX_VALUE))))))
         );
         PanelRegistroLibro2Layout.setVerticalGroup(
             PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,7 +1083,8 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
+                    .addComponent(jButton9)
+                    .addComponent(jButton3))
                 .addGap(94, 94, 94))
         );
 
@@ -1156,7 +1183,7 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_YearLibroRegistroTxtFieldActionPerformed
 
-    
+            
     public int validaInt(String number){
     int result = 0; //Valor default.
     try{
@@ -1502,8 +1529,12 @@ public class Biblioteca extends javax.swing.JFrame {
             searchAllBookBtn.setVisible(true);
             searchBookComboBox.setVisible(true);
             AllAtributeNotaComboBox.setVisible(false);
-    
-        
+  
+    }
+      
+       public void createButtonGroupAddNota() {
+        addNotaBtnGroup.add(ApartadAniadirLibroEnNotasRadioBtn);
+        addNotaBtnGroup.add(ApartadoAniadirArticuloEnNotasRadioBtn);
     }
      
      
@@ -1678,6 +1709,20 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_exportarLibrosBtnActionPerformed
 
+    
+    
+    private void ApartadAniadirLibroEnNotasRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApartadAniadirLibroEnNotasRadioBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApartadAniadirLibroEnNotasRadioBtnActionPerformed
+
+    private void ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed
+
+    private void TemaNotaTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TemaNotaTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TemaNotaTxtFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1717,7 +1762,6 @@ public class Biblioteca extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup AddNotaBtnGroup;
     private javax.swing.JComboBox<String> AllAtributeNotaComboBox;
     private javax.swing.JRadioButton ApartadAniadirLibroEnNotasRadioBtn;
     private javax.swing.JRadioButton ApartadoAniadirArticuloEnNotasRadioBtn;
@@ -1744,17 +1788,19 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JTextField RevistaArticuloRegistroTxtField;
     private javax.swing.JButton SaveArticuloRegistroBtn;
     private javax.swing.JButton SaveLibroRegistroBtn;
-    private javax.swing.JRadioButton TemaHistoriaEnNotaRadioBtn;
-    private javax.swing.JRadioButton TemaOtroEnNotasRadioBtn;
-    private javax.swing.JRadioButton TemaTecnologiaDeNotaEnNotasRadioBtn;
+    private javax.swing.JTextField TemaNotaTxtField;
     private javax.swing.JTextField TituloArticuloRegistroTxtField;
     private javax.swing.JTextField TituloLibroRegistroTxtField;
     private javax.swing.JTextField YearArticuloRegistroTxtField;
     private javax.swing.JTextField YearLibroRegistroTxtField;
+    private javax.swing.ButtonGroup addNotaBtnGroup;
     private javax.swing.ButtonGroup chooseTmaNotaBtnGroup;
     private javax.swing.JButton createNotaNotasBtn;
     private javax.swing.JTextArea createNotaNotasTxtArea;
     private javax.swing.JButton exportarLibrosBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
