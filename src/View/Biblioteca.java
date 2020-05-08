@@ -5,11 +5,16 @@
  */
 package View;
 import Controller.ConexionBD;
+import java.awt.print.Book;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Natalia
@@ -26,6 +31,11 @@ public class Biblioteca extends javax.swing.JFrame {
     public Biblioteca() {
         initComponents();
         setVisible(true);
+        //arreglar metodo createbuttongroup con if para que salga uno u otro
+        createButtonGroupBuscar();
+        addItemsToArticleComboBox();
+        addItemsToBookComboBox();
+        addItemsToNotaComboBox();
     }
 
     /**
@@ -84,14 +94,16 @@ public class Biblioteca extends javax.swing.JFrame {
         NotaSearchRadioBtn = new javax.swing.JRadioButton();
         searchComboTxtField = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        exportarBtn = new javax.swing.JButton();
+        exportarLibrosBtn = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         searchBookBtn = new javax.swing.JButton();
         searchArticleComboBox = new javax.swing.JComboBox<>();
-        searchTmaComboBox = new javax.swing.JComboBox<>();
-        jLabel21 = new javax.swing.JLabel();
         searchArticleBtn = new javax.swing.JButton();
         searchNotasBtn = new javax.swing.JButton();
+        searchAllBookBtn = new javax.swing.JButton();
+        searchAllArticleBtn = new javax.swing.JButton();
+        searchAllNotasBtn = new javax.swing.JButton();
+        AllAtributeNotaComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         searchTable = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
@@ -457,14 +469,19 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 102));
 
-        searchBookComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         searchBookComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBookComboBoxActionPerformed(evt);
             }
         });
 
+        libroSearchRadioBtn.setSelected(true);
         libroSearchRadioBtn.setText("Libros");
+        libroSearchRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                libroSearchRadioBtnActionPerformed(evt);
+            }
+        });
 
         ArticuloSearchRadioBtn.setText("Articulos");
         ArticuloSearchRadioBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -474,10 +491,20 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         NotaSearchRadioBtn.setText("Notas");
+        NotaSearchRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NotaSearchRadioBtnActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Elija su criterio de búsqueda");
 
-        exportarBtn.setText("Exportar");
+        exportarLibrosBtn.setText("Exportar");
+        exportarLibrosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarLibrosBtnActionPerformed(evt);
+            }
+        });
 
         jLabel26.setText("¿Desea exportar los datos?");
 
@@ -488,15 +515,35 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         });
 
-        searchArticleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        searchTmaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel21.setText("Si quiso notas, elija su tema");
-
         searchArticleBtn.setText("Buscar");
+        searchArticleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchArticleBtnActionPerformed(evt);
+            }
+        });
 
         searchNotasBtn.setText("Buscar");
+
+        searchAllBookBtn.setText("Buscar");
+        searchAllBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchAllBookBtnActionPerformed(evt);
+            }
+        });
+
+        searchAllArticleBtn.setText("Buscar");
+        searchAllArticleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchAllArticleBtnActionPerformed(evt);
+            }
+        });
+
+        searchAllNotasBtn.setText("Buscar");
+        searchAllNotasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchAllNotasBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -507,33 +554,42 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AllAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(88, 88, 88)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(39, 39, 39)
-                                    .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(libroSearchRadioBtn)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(ArticuloSearchRadioBtn)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(NotaSearchRadioBtn)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addGap(41, 41, 41)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchBookBtn)
-                                    .addComponent(exportarBtn)
-                                    .addComponent(searchArticleBtn)
-                                    .addComponent(searchNotasBtn)))))
+                            .addComponent(searchBookBtn)
+                            .addComponent(searchArticleBtn)
+                            .addComponent(searchNotasBtn)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                        .addComponent(jLabel26)
                         .addGap(18, 18, 18)
-                        .addComponent(searchTmaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(exportarLibrosBtn)
+                        .addGap(45, 45, 45))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(79, 79, 79)
+                            .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addComponent(libroSearchRadioBtn)
+                                    .addGap(27, 27, 27))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(searchAllBookBtn)
+                                    .addGap(18, 18, 18)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ArticuloSearchRadioBtn)
+                                .addComponent(searchAllArticleBtn))
+                            .addGap(28, 28, 28)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(searchAllNotasBtn)
+                                .addComponent(NotaSearchRadioBtn)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -544,27 +600,34 @@ public class Biblioteca extends javax.swing.JFrame {
                     .addComponent(libroSearchRadioBtn)
                     .addComponent(ArticuloSearchRadioBtn)
                     .addComponent(NotaSearchRadioBtn))
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchTmaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
-                .addGap(2, 2, 2)
+                    .addComponent(searchAllBookBtn)
+                    .addComponent(searchAllArticleBtn)
+                    .addComponent(searchAllNotasBtn))
+                .addGap(24, 24, 24)
                 .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(searchNotasBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchArticleBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchBookBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(searchNotasBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchArticleBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchBookBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AllAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exportarBtn)
+                    .addComponent(exportarLibrosBtn)
                     .addComponent(jLabel26))
                 .addGap(25, 25, 25))
         );
@@ -591,8 +654,8 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
             .addGroup(PanelBusquedaLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel22)
@@ -1146,7 +1209,20 @@ public class Biblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_searchBookComboBoxActionPerformed
 
     private void ArticuloSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArticuloSearchRadioBtnActionPerformed
-        // TODO add your handling code here:
+
+        if(ArticuloSearchRadioBtn.isSelected()) { 
+            searchArticleComboBox.setVisible(true);
+            searchAllArticleBtn.setVisible(true);
+            searchAllNotasBtn.setVisible(false);
+            searchArticleBtn.setVisible(true);
+            searchNotasBtn.setVisible(false);
+            searchBookBtn.setVisible(false);
+            searchAllBookBtn.setVisible(false);
+            searchBookComboBox.setVisible(false);
+            AllAtributeNotaComboBox.setVisible(false);
+
+          }
+        
     }//GEN-LAST:event_ArticuloSearchRadioBtnActionPerformed
 
     private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
@@ -1200,6 +1276,42 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SaveLibroRegistroBtnActionPerformed
 
+      public void showBookTable() {
+            DefaultTableModel tablaLibro = new DefaultTableModel();
+            tablaLibro.addColumn("Id");
+            tablaLibro.addColumn("ISBN");
+            tablaLibro.addColumn("Titulo");
+            tablaLibro.addColumn("Autor");
+            tablaLibro.addColumn("Editorial");
+            tablaLibro.addColumn("Numero pags");
+            tablaLibro.addColumn("Anio");
+            
+            searchTable.setModel(tablaLibro);
+            
+            String sql = "{call listarTodoLibros}";
+            
+            String datos [] = new String [7];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                datos [5] = rs.getString(6);
+                datos [6] = rs.getString(7);
+                tablaLibro.addRow(datos);
+            } 
+            searchTable.setModel(tablaLibro);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
+    
    public void showBookTableByAttribute (String value) {
         DefaultTableModel tablaLibro = new DefaultTableModel();
         tablaLibro.addColumn("Id");
@@ -1236,6 +1348,115 @@ public class Biblioteca extends javax.swing.JFrame {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
+   
+    public void showArticleTable() {
+            DefaultTableModel tablaArticulo = new DefaultTableModel();
+            tablaArticulo.addColumn("Id");
+            tablaArticulo.addColumn("ISSN");
+            tablaArticulo.addColumn("Titulo");
+            tablaArticulo.addColumn("Autor");
+            tablaArticulo.addColumn("Nombre revista");
+            tablaArticulo.addColumn("Pagina inicio");
+            tablaArticulo.addColumn("Pagina fin");
+            tablaArticulo.addColumn("Mes");
+            tablaArticulo.addColumn("Año");
+            
+            searchTable.setModel(tablaArticulo);
+            
+            String sql = "{call listarTodoArticulos}";
+            
+            String columnasTabla [] = new String [7];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                columnasTabla [0] = rs.getString(1);
+                columnasTabla [1] = rs.getString(2);
+                columnasTabla [2] = rs.getString(3);
+                columnasTabla [3] = rs.getString(4);
+                columnasTabla [4] = rs.getString(5);
+                columnasTabla [5] = rs.getString(6);
+                columnasTabla [6] = rs.getString(7);
+        
+                tablaArticulo.addRow(columnasTabla);
+            } 
+            searchTable.setModel(tablaArticulo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+   
+   
+   public void showArticleTableByAttribute (String value) {
+        DefaultTableModel tablaArticulo = new DefaultTableModel();
+        tablaArticulo.addColumn("Id");
+        tablaArticulo.addColumn("ISSN");
+        tablaArticulo.addColumn("Titulo");
+        tablaArticulo.addColumn("Autor");
+        tablaArticulo.addColumn("Nombre revista");
+        tablaArticulo.addColumn("Pagina inicio");
+        tablaArticulo.addColumn("Pagina fin");
+        tablaArticulo.addColumn("Mes");
+        tablaArticulo.addColumn("Año");
+
+        searchTable.setModel(tablaArticulo);
+            
+        String sql = "SELECT * FROM Articulo WHERE " + attribute + "='" + value + "'";
+            
+        String columnasTabla [] = new String [7];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                columnasTabla [0] = rs.getString(1);
+                columnasTabla [1] = rs.getString(2);
+                columnasTabla [2] = rs.getString(3);
+                columnasTabla [3] = rs.getString(4);
+                columnasTabla [4] = rs.getString(5);
+                columnasTabla [5] = rs.getString(6);
+                columnasTabla [6] = rs.getString(7);
+        
+                tablaArticulo.addRow(columnasTabla);
+            } 
+            searchTable.setModel(tablaArticulo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+   
+    public void showNoteTable() {
+            DefaultTableModel tablaNota = new DefaultTableModel();
+            tablaNota.addColumn("Id");
+            tablaNota.addColumn("Tema");
+            tablaNota.addColumn("Libro");
+            tablaNota.addColumn("Articulo");
+
+            
+            searchTable.setModel(tablaNota);
+            
+            String sql = "{call listarTodoNotas}";
+            
+            String columnasTabla [] = new String [7];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                columnasTabla [0] = rs.getString(1);
+                columnasTabla [1] = rs.getString(2);
+                columnasTabla [2] = rs.getString(3);
+                columnasTabla [3] = rs.getString(4);
+        
+                tablaNota.addRow(columnasTabla);
+            } 
+            searchTable.setModel(tablaNota);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+   
 
     public void addItemsToBookComboBox() {
         searchBookComboBox.addItem("idLibro");
@@ -1245,7 +1466,7 @@ public class Biblioteca extends javax.swing.JFrame {
         searchBookComboBox.addItem("Editorial");
         searchBookComboBox.addItem("Numero_pags");
         searchBookComboBox.addItem("Anio");
-        
+   
     }
     
      public void addItemsToArticleComboBox() {
@@ -1260,21 +1481,202 @@ public class Biblioteca extends javax.swing.JFrame {
         searchArticleComboBox.addItem("Anio");
     }
      
-      public void addItemsToTemaComboBox() {
-         searchTmaComboBox.addItem("idTema");
-        searchTmaComboBox.addItem("Titulo");
+        public void addItemsToNotaComboBox() {
+        AllAtributeNotaComboBox.addItem("idNota");
+        AllAtributeNotaComboBox.addItem("Tema_idTema");
+        AllAtributeNotaComboBox.addItem("Libro_idLibro");
+        AllAtributeNotaComboBox.addItem("Articulo_idArticulo");
 
     }
-      
-      
-   
 
+      public void createButtonGroupBuscar() {
+        searchBtnGroup.add(libroSearchRadioBtn);
+        searchBtnGroup.add(ArticuloSearchRadioBtn);
+        searchBtnGroup.add(NotaSearchRadioBtn);
+        searchArticleComboBox.setVisible(false);
+            searchAllArticleBtn.setVisible(false);
+            searchAllNotasBtn.setVisible(false);
+            searchArticleBtn.setVisible(false);
+            searchNotasBtn.setVisible(false);
+            searchBookBtn.setVisible(true);
+            searchAllBookBtn.setVisible(true);
+            searchBookComboBox.setVisible(true);
+            AllAtributeNotaComboBox.setVisible(false);
+    
+        
+    }
+     
+     
     private void searchBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookBtnActionPerformed
       
         attribute = searchBookComboBox.getSelectedItem().toString();
         showBookTableByAttribute(searchComboTxtField.getText());
         searchComboTxtField.setText("");
     }//GEN-LAST:event_searchBookBtnActionPerformed
+
+    private void searchArticleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchArticleBtnActionPerformed
+        
+         attribute = searchArticleComboBox.getSelectedItem().toString();
+        showArticleTableByAttribute(searchComboTxtField.getText());
+        searchComboTxtField.setText("");
+    }//GEN-LAST:event_searchArticleBtnActionPerformed
+
+    private void searchAllBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllBookBtnActionPerformed
+        
+        if (libroSearchRadioBtn.isSelected()) {
+             showBookTable();
+        } else {
+            
+        }
+        
+    }//GEN-LAST:event_searchAllBookBtnActionPerformed
+
+
+    private void searchAllArticleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllArticleBtnActionPerformed
+        if (ArticuloSearchRadioBtn.isSelected()) {
+                showArticleTable();        
+        }
+        
+    }//GEN-LAST:event_searchAllArticleBtnActionPerformed
+
+    private void searchAllNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllNotasBtnActionPerformed
+        
+        if (NotaSearchRadioBtn.isSelected()) {
+            showNoteTable();
+        }
+        
+    }//GEN-LAST:event_searchAllNotasBtnActionPerformed
+
+    private void libroSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libroSearchRadioBtnActionPerformed
+        if (libroSearchRadioBtn.isSelected()) {
+            searchArticleComboBox.setVisible(false);
+            searchAllArticleBtn.setVisible(false);
+            searchAllNotasBtn.setVisible(false);
+            searchArticleBtn.setVisible(false);
+            searchNotasBtn.setVisible(false);
+            searchBookBtn.setVisible(true);
+            searchAllBookBtn.setVisible(true);
+            searchBookComboBox.setVisible(true);
+            AllAtributeNotaComboBox.setVisible(false);
+          }
+    }//GEN-LAST:event_libroSearchRadioBtnActionPerformed
+
+    private void NotaSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotaSearchRadioBtnActionPerformed
+
+        if(NotaSearchRadioBtn.isSelected()) { 
+            searchArticleComboBox.setVisible(false);
+            searchAllArticleBtn.setVisible(false);
+            searchAllNotasBtn.setVisible(true);
+            searchArticleBtn.setVisible(false);
+            searchNotasBtn.setVisible(true);
+            searchBookBtn.setVisible(false);
+            searchAllBookBtn.setVisible(false);
+        AllAtributeNotaComboBox.setVisible(true);
+        }
+    }//GEN-LAST:event_NotaSearchRadioBtnActionPerformed
+
+    public void exportBooks(){
+    ResultSet rs = null;
+        StringBuffer strBuf = null;        
+        try {
+            Statement stm = con.createStatement();
+            rs = stm.executeQuery("SELECT * FROM Libro");
+            strBuf = new StringBuffer();            
+            FileWriter fw = new FileWriter(new File("Libros.txt" ));
+            String data_row = "";                          
+            while(rs.next()){
+                data_row = "\n";
+                data_row += rs.getInt("idLibro");
+                 data_row += "," + rs.getString("ISBN").trim();
+                data_row += "," + rs.getString("Titulo").trim();
+                data_row += "," + rs.getString("Autor").trim();
+                data_row += "," + rs.getString("Editorial").trim();
+                data_row += "," + rs.getString("Numero_pags").trim();
+                data_row += "," + rs.getString("Anio").trim();
+                fw.write(data_row);
+            }
+            fw.close();
+            rs.close();
+             JOptionPane.showMessageDialog(null, "Exportado correctamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void exportArticles(){
+    ResultSet rs = null;
+        StringBuffer strBuf = null;        
+        try {
+            Statement stm = con.createStatement();
+            rs = stm.executeQuery("SELECT * FROM Articulo");
+            strBuf = new StringBuffer();            
+            FileWriter fw = new FileWriter(new File("Articulos.txt" ));
+            String data_row = "";                          
+            while(rs.next()){
+                data_row = "\n";
+                data_row += rs.getInt("idArticulo");
+                data_row += "," + rs.getString("ISSN").trim();
+                data_row += "," + rs.getString("Titulo").trim();
+                data_row += "," + rs.getString("Autor").trim();
+                data_row += "," + rs.getString("Nom_revista").trim();
+                data_row += "," + rs.getString("Pag_inicio").trim();
+                data_row += "," + rs.getString("Pag_fin").trim();
+                data_row += "," + rs.getString("Mes").trim();
+                data_row += "," + rs.getString("Anio").trim();
+                fw.write(data_row);
+            }
+            fw.close();
+            rs.close();
+             JOptionPane.showMessageDialog(null, "Exportado correctamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+     public void exportNotes(){
+    ResultSet rs = null;
+        StringBuffer strBuf = null;        
+        try {
+            Statement stm = con.createStatement();
+            rs = stm.executeQuery("SELECT * FROM Nota");
+            strBuf = new StringBuffer();            
+            FileWriter fw = new FileWriter(new File("Notas.txt" ));
+            String data_row = "";                          
+            while(rs.next()){
+                data_row = "\n";
+                data_row += rs.getInt("idNota");
+                 data_row += "," + rs.getString("Tema_idTema").trim();
+                data_row += "," + rs.getString("Libro_idLibro").trim();
+                data_row += "," + rs.getString("Articulo_idArticulo").trim();
+                fw.write(data_row);
+            }
+            fw.close();
+            
+            rs.close();
+            JOptionPane.showMessageDialog(null, "Exportado correctamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    private void exportarLibrosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarLibrosBtnActionPerformed
+
+            if(libroSearchRadioBtn.isSelected()){
+                exportBooks(); 
+        } else if(ArticuloSearchRadioBtn.isSelected()){
+                exportArticles();
+        }else if(NotaSearchRadioBtn.isSelected()){
+                exportNotes();
+        }     
+
+        
+    }//GEN-LAST:event_exportarLibrosBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1316,6 +1718,7 @@ public class Biblioteca extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup AddNotaBtnGroup;
+    private javax.swing.JComboBox<String> AllAtributeNotaComboBox;
     private javax.swing.JRadioButton ApartadAniadirLibroEnNotasRadioBtn;
     private javax.swing.JRadioButton ApartadoAniadirArticuloEnNotasRadioBtn;
     private javax.swing.JRadioButton ArticuloSearchRadioBtn;
@@ -1351,7 +1754,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.ButtonGroup chooseTmaNotaBtnGroup;
     private javax.swing.JButton createNotaNotasBtn;
     private javax.swing.JTextArea createNotaNotasTxtArea;
-    private javax.swing.JButton exportarBtn;
+    private javax.swing.JButton exportarLibrosBtn;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -1369,7 +1772,6 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1419,6 +1821,9 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField37;
     private javax.swing.JTextField jTextField38;
     private javax.swing.JRadioButton libroSearchRadioBtn;
+    private javax.swing.JButton searchAllArticleBtn;
+    private javax.swing.JButton searchAllBookBtn;
+    private javax.swing.JButton searchAllNotasBtn;
     private javax.swing.JButton searchArticleBtn;
     private javax.swing.JComboBox<String> searchArticleComboBox;
     private javax.swing.JButton searchBookBtn;
@@ -1428,7 +1833,6 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JButton searchNotasBtn;
     private javax.swing.JComboBox<String> searchPorAtributoEnNotasComboBox;
     private javax.swing.JTable searchTable;
-    private javax.swing.JComboBox<String> searchTmaComboBox;
     private javax.swing.JTable showLibArtEnNotasTable;
     private javax.swing.JTextField valorEscritoAtributosSearchEnNotasTxtField;
     // End of variables declaration//GEN-END:variables
