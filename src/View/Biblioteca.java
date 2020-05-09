@@ -34,6 +34,7 @@ public class Biblioteca extends javax.swing.JFrame {
         //arreglar metodo createbuttongroup con if para que salga uno u otro
         createButtonGroupBuscar();
         createButtonGroupAddNota();
+        createButtonGroupModify();
         addItemsToArticleComboBox();
         addItemsToBookComboBox();
         addItemsToNotaComboBox();
@@ -51,6 +52,7 @@ public class Biblioteca extends javax.swing.JFrame {
         searchBtnGroup = new javax.swing.ButtonGroup();
         addNotaBtnGroup = new javax.swing.ButtonGroup();
         chooseTmaNotaBtnGroup = new javax.swing.ButtonGroup();
+        modifyBtnGroup = new javax.swing.ButtonGroup();
         PanelGeneral = new javax.swing.JTabbedPane();
         RegistroDeTodo = new javax.swing.JPanel();
         PanelRegistroArticulo = new javax.swing.JPanel();
@@ -127,7 +129,6 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         PanelModificar = new javax.swing.JPanel();
         PanelRegistroArticulo1 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -136,36 +137,37 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
-        jTextField28 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        jTextField38 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        articISSNModifyTxtField = new javax.swing.JTextField();
+        articTituloModifyTxtField = new javax.swing.JTextField();
+        articAutorModifyTxtField = new javax.swing.JTextField();
+        articRevistaModifyTxtField = new javax.swing.JTextField();
+        articPiniModifyTxtField = new javax.swing.JTextField();
+        articPFinModifyTxtField = new javax.swing.JTextField();
+        articMesModifyTxtField = new javax.swing.JTextField();
+        articAnioModifyTxtField = new javax.swing.JTextField();
+        articSaveModifyBtn = new javax.swing.JButton();
+        articModificarModifyBtn = new javax.swing.JButton();
+        articDeleteModifyBtn = new javax.swing.JButton();
+        articleModifyRadioBtn = new javax.swing.JRadioButton();
         PanelRegistroLibro2 = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jTextField33 = new javax.swing.JTextField();
-        jTextField34 = new javax.swing.JTextField();
-        jTextField35 = new javax.swing.JTextField();
-        jTextField36 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bookISBNModifyTxtField = new javax.swing.JTextField();
+        bookTituloModifyTxtField = new javax.swing.JTextField();
+        bookAutorModifyTxtField = new javax.swing.JTextField();
+        bookEditorialModifyTxtField = new javax.swing.JTextField();
+        bookNpagslModifyTxtField = new javax.swing.JTextField();
+        bookAnioModifyTxtField = new javax.swing.JTextField();
+        bookSaveModifyBtn = new javax.swing.JButton();
+        bookModificarModifyBtn = new javax.swing.JButton();
+        bookDeleteModifyBtn = new javax.swing.JButton();
+        bookModifyRadioBtn = new javax.swing.JRadioButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        modifyTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -835,9 +837,6 @@ public class Biblioteca extends javax.swing.JFrame {
         PanelRegistroArticulo1.setBackground(new java.awt.Color(204, 204, 255));
         PanelRegistroArticulo1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel28.setText("Articulo");
-
         jLabel29.setText("ISSN");
 
         jLabel30.setText("Titulo");
@@ -854,11 +853,34 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jLabel36.setText("Año");
 
-        jButton4.setText("Guardar");
+        articSaveModifyBtn.setText("Guardar");
+        articSaveModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articSaveModifyBtnActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("Modificar");
+        articModificarModifyBtn.setText("Modificar");
+        articModificarModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articModificarModifyBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Eliminar");
+        articDeleteModifyBtn.setText("Eliminar");
+        articDeleteModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articDeleteModifyBtnActionPerformed(evt);
+            }
+        });
+
+        articleModifyRadioBtn.setSelected(true);
+        articleModifyRadioBtn.setText("Articulo");
+        articleModifyRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articleModifyRadioBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelRegistroArticulo1Layout = new javax.swing.GroupLayout(PanelRegistroArticulo1);
         PanelRegistroArticulo1.setLayout(PanelRegistroArticulo1Layout);
@@ -867,23 +889,23 @@ public class Biblioteca extends javax.swing.JFrame {
             .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel28)
+                    .addComponent(articleModifyRadioBtn)
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField27))
+                        .addComponent(articAutorModifyTxtField))
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField28))
+                        .addComponent(articRevistaModifyTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(articISSNModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(articTituloModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
@@ -892,76 +914,74 @@ public class Biblioteca extends javax.swing.JFrame {
                             .addComponent(jLabel34))
                         .addGap(18, 18, 18)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField29, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(jTextField30))
+                            .addComponent(articPiniModifyTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(articPFinModifyTxtField))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                                 .addComponent(jLabel36)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField38))
+                                .addComponent(articAnioModifyTxtField))
                             .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                                 .addComponent(jLabel35)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(articMesModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4)
-                            .addComponent(jButton8))
+                            .addComponent(articDeleteModifyBtn)
+                            .addComponent(articSaveModifyBtn)
+                            .addComponent(articModificarModifyBtn))
                         .addGap(17, 17, 17))))
         );
         PanelRegistroArticulo1Layout.setVerticalGroup(
             PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
-                .addComponent(jLabel28)
-                .addGap(14, 14, 14)
+                .addGap(4, 4, 4)
+                .addComponent(articleModifyRadioBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(articISSNModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(articPiniModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34)
-                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(articPFinModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30)
-                            .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(articTituloModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31)
                             .addComponent(jLabel35)
-                            .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(articAutorModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(articMesModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(PanelRegistroArticulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
                             .addComponent(jLabel36)
-                            .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(articRevistaModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(articAnioModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 35, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jButton2)
+                        .addComponent(articDeleteModifyBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8)
+                        .addComponent(articModificarModifyBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(articSaveModifyBtn)))
                 .addContainerGap())
         );
 
         PanelRegistroLibro2.setBackground(new java.awt.Color(153, 153, 255));
         PanelRegistroLibro2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jLabel44.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel44.setText("Libro");
 
         jLabel45.setText("ISBN");
 
@@ -975,35 +995,57 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jLabel50.setText("Año");
 
-        jTextField31.addActionListener(new java.awt.event.ActionListener() {
+        bookISBNModifyTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField31ActionPerformed(evt);
+                bookISBNModifyTxtFieldActionPerformed(evt);
             }
         });
 
-        jTextField32.addActionListener(new java.awt.event.ActionListener() {
+        bookTituloModifyTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField32ActionPerformed(evt);
+                bookTituloModifyTxtFieldActionPerformed(evt);
             }
         });
 
-        jTextField33.addActionListener(new java.awt.event.ActionListener() {
+        bookAutorModifyTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField33ActionPerformed(evt);
+                bookAutorModifyTxtFieldActionPerformed(evt);
             }
         });
 
-        jTextField36.addActionListener(new java.awt.event.ActionListener() {
+        bookAnioModifyTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField36ActionPerformed(evt);
+                bookAnioModifyTxtFieldActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Guardar");
+        bookSaveModifyBtn.setText("Guardar");
+        bookSaveModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookSaveModifyBtnActionPerformed(evt);
+            }
+        });
 
-        jButton9.setText("Modificar");
+        bookModificarModifyBtn.setText("Modificar");
+        bookModificarModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookModificarModifyBtnActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        bookDeleteModifyBtn.setText("Eliminar");
+        bookDeleteModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookDeleteModifyBtnActionPerformed(evt);
+            }
+        });
+
+        bookModifyRadioBtn.setText("Libro");
+        bookModifyRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookModifyRadioBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelRegistroLibro2Layout = new javax.swing.GroupLayout(PanelRegistroLibro2);
         PanelRegistroLibro2.setLayout(PanelRegistroLibro2Layout);
@@ -1013,82 +1055,77 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                        .addComponent(jLabel44)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                        .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel45)
-                                    .addComponent(jLabel46))
-                                .addGap(18, 18, 18)
-                                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField33, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(jTextField32, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel47)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLibro2Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addGap(16, 16, 16)))
                         .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel46))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bookAutorModifyTxtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(bookTituloModifyTxtField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bookISBNModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel47)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLibro2Layout.createSequentialGroup()
+                        .addComponent(bookDeleteModifyBtn)
+                        .addGap(16, 16, 16))
+                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(bookModifyRadioBtn)))
+                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                        .addComponent(jLabel50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bookAnioModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelRegistroLibro2Layout.createSequentialGroup()
+                        .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jLabel48)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(bookEditorialModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                    .addComponent(jLabel49)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(bookNpagslModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel50)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelRegistroLibro2Layout.createSequentialGroup()
-                                .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                            .addGap(29, 29, 29)
-                                            .addComponent(jLabel48)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel49)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton9)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jButton7)))
-                                .addContainerGap(20, Short.MAX_VALUE))))))
+                                .addComponent(bookModificarModifyBtn)
+                                .addGap(31, 31, 31)
+                                .addComponent(bookSaveModifyBtn)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         PanelRegistroLibro2Layout.setVerticalGroup(
             PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel44)
+                .addComponent(bookModifyRadioBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookISBNModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel48)
-                    .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bookEditorialModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookTituloModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bookNpagslModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookAutorModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel50)
-                    .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bookAnioModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton3))
+                    .addComponent(bookSaveModifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookModificarModifyBtn)
+                    .addComponent(bookDeleteModifyBtn))
                 .addGap(94, 94, 94))
         );
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        modifyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -1099,7 +1136,7 @@ public class Biblioteca extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane5.setViewportView(jTable3);
+        jScrollPane5.setViewportView(modifyTable);
 
         javax.swing.GroupLayout PanelModificarLayout = new javax.swing.GroupLayout(PanelModificar);
         PanelModificar.setLayout(PanelModificarLayout);
@@ -1197,7 +1234,14 @@ public class Biblioteca extends javax.swing.JFrame {
 }
     
     private void SaveArticuloRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveArticuloRegistroBtnActionPerformed
-         int PIni, PFin, Mes, Anio;
+   
+        saveArticles();
+
+    }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
+
+    public void saveArticles(){
+    
+     int PIni, PFin, Mes, Anio;
          PIni = validaInt(PInicioArticuloRegistroTxtField.getText());
          PFin = validaInt(PFinArticuloRegistroTxtField.getText());
          Mes = validaInt(MesArticuloRegistroTxtField.getText());
@@ -1228,9 +1272,9 @@ public class Biblioteca extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
-
+}
+    
+    
     private void searchBookComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBookComboBoxActionPerformed
@@ -1252,21 +1296,21 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ArticuloSearchRadioBtnActionPerformed
 
-    private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
+    private void bookISBNModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookISBNModifyTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField31ActionPerformed
+    }//GEN-LAST:event_bookISBNModifyTxtFieldActionPerformed
 
-    private void jTextField32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField32ActionPerformed
+    private void bookTituloModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookTituloModifyTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField32ActionPerformed
+    }//GEN-LAST:event_bookTituloModifyTxtFieldActionPerformed
 
-    private void jTextField33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField33ActionPerformed
+    private void bookAutorModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAutorModifyTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField33ActionPerformed
+    }//GEN-LAST:event_bookAutorModifyTxtFieldActionPerformed
 
-    private void jTextField36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField36ActionPerformed
+    private void bookAnioModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAnioModifyTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField36ActionPerformed
+    }//GEN-LAST:event_bookAnioModifyTxtFieldActionPerformed
 
     private void createNotaNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNotaNotasBtnActionPerformed
         // TODO add your handling code here:
@@ -1536,6 +1580,23 @@ public class Biblioteca extends javax.swing.JFrame {
         addNotaBtnGroup.add(ApartadAniadirLibroEnNotasRadioBtn);
         addNotaBtnGroup.add(ApartadoAniadirArticuloEnNotasRadioBtn);
     }
+       
+       
+        public void createButtonGroupModify() {
+        modifyBtnGroup.add(articleModifyRadioBtn);
+        modifyBtnGroup.add(bookModifyRadioBtn);
+        bookISBNModifyTxtField.setEditable(false);
+        bookTituloModifyTxtField.setEditable(false);
+        bookAutorModifyTxtField.setEditable(false);
+        bookEditorialModifyTxtField.setEditable(false);
+        bookNpagslModifyTxtField.setEditable(false);
+        bookAnioModifyTxtField.setEditable(false);
+        bookDeleteModifyBtn.setEnabled(false);
+        bookModificarModifyBtn.setEnabled(false);
+        bookSaveModifyBtn.setEnabled(false);
+        searchAllArticlesModify();
+        
+    }
      
      
     private void searchBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookBtnActionPerformed
@@ -1723,6 +1784,278 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TemaNotaTxtFieldActionPerformed
 
+    private void bookModifyRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookModifyRadioBtnActionPerformed
+       
+        if(bookModifyRadioBtn.isSelected()){
+        bookISBNModifyTxtField.setEditable(true);
+        bookTituloModifyTxtField.setEditable(true);
+        bookAutorModifyTxtField.setEditable(true);
+        bookEditorialModifyTxtField.setEditable(true);
+        bookNpagslModifyTxtField.setEditable(true);
+        bookAnioModifyTxtField.setEditable(true);
+        bookDeleteModifyBtn.setEnabled(true);
+        bookModificarModifyBtn.setEnabled(true);
+        bookSaveModifyBtn.setEnabled(true);
+        articISSNModifyTxtField.setEditable(false);
+        articTituloModifyTxtField.setEditable(false);
+        articAutorModifyTxtField.setEditable(false);
+        articRevistaModifyTxtField.setEditable(false);
+        articPiniModifyTxtField.setEditable(false);
+        articPFinModifyTxtField.setEditable(false);
+        articMesModifyTxtField.setEditable(false);
+        articAnioModifyTxtField.setEditable(false);
+        articDeleteModifyBtn.setEnabled(false);
+        articModificarModifyBtn.setEnabled(false);
+        articSaveModifyBtn.setEnabled(false);
+        if(bookModifyRadioBtn.isSelected()){
+        DefaultTableModel bookTable = new DefaultTableModel();
+        bookTable.addColumn("Id");
+        bookTable.addColumn("ISBN");
+        bookTable.addColumn("Titulo");
+        bookTable.addColumn("Autor");
+        bookTable.addColumn("Editorial");
+        bookTable.addColumn("Num_pags");
+        bookTable.addColumn("Año");   
+
+        modifyTable.setModel(bookTable);
+              
+        try {   
+            CallableStatement cst = con.prepareCall("{call listarTodoLibros}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String[7];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    datos [5] = rs.getString(6);
+                    datos [6] = rs.getString(7);
+                    bookTable.addRow(datos);
+            } 
+        
+            modifyTable.setModel(bookTable);
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   }  
+    }//GEN-LAST:event_bookModifyRadioBtnActionPerformed
+
+    private void articleModifyRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleModifyRadioBtnActionPerformed
+        if (articleModifyRadioBtn.isSelected()) {
+        articISSNModifyTxtField.setEditable(true);
+        articTituloModifyTxtField.setEditable(true);
+        articAutorModifyTxtField.setEditable(true);
+        articRevistaModifyTxtField.setEditable(true);
+        articPiniModifyTxtField.setEditable(true);
+        articPFinModifyTxtField.setEditable(true);
+        articMesModifyTxtField.setEditable(true);
+        articAnioModifyTxtField.setEditable(true);
+        articDeleteModifyBtn.setEnabled(true);
+        articModificarModifyBtn.setEnabled(true);
+        articSaveModifyBtn.setEnabled(true);
+        bookISBNModifyTxtField.setEditable(false);
+        bookTituloModifyTxtField.setEditable(false);
+        bookAutorModifyTxtField.setEditable(false);
+        bookEditorialModifyTxtField.setEditable(false);
+        bookNpagslModifyTxtField.setEditable(false);
+        bookAnioModifyTxtField.setEditable(false);
+        bookDeleteModifyBtn.setEnabled(false);
+        bookModificarModifyBtn.setEnabled(false);
+        bookSaveModifyBtn.setEnabled(false);
+        searchAllArticlesModify();
+        }
+    }//GEN-LAST:event_articleModifyRadioBtnActionPerformed
+
+    public void searchAllArticlesModify(){
+    
+        cleanAllModify();
+        
+    if (articleModifyRadioBtn.isSelected()) {
+        DefaultTableModel articleTable = new DefaultTableModel();
+        articleTable.addColumn("Id");
+        articleTable.addColumn("ISSN");
+        articleTable.addColumn("Titulo");
+        articleTable.addColumn("Autor");
+        articleTable.addColumn("Nom_revista");
+        articleTable.addColumn("Pag_inicio");
+        articleTable.addColumn("Pag_fin");
+        articleTable.addColumn("Mes");
+        articleTable.addColumn("Año");
+        
+
+        modifyTable.setModel(articleTable);
+            
+        try {  
+            CallableStatement cst = con.prepareCall("{call listarTodoArticulos}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String [9];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    datos [5] = rs.getString(6);
+                    datos [6] = rs.getString(7);
+                    datos [7] = rs.getString(8);
+                    datos [8] = rs.getString(9);
+                    articleTable.addRow(datos);
+            } 
+            
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+  }
+    
+    public void cleanAllModify() {
+        
+        articISSNModifyTxtField.setText("");
+        articTituloModifyTxtField.setText("");
+        articAutorModifyTxtField.setText("");
+        articRevistaModifyTxtField.setText("");
+        articPiniModifyTxtField.setText("");
+        articPFinModifyTxtField.setText("");
+        articMesModifyTxtField.setText("");
+        articAnioModifyTxtField.setText("");
+        
+        bookISBNModifyTxtField.setText("");
+        bookTituloModifyTxtField.setText("");
+        bookAutorModifyTxtField.setText("");
+        bookEditorialModifyTxtField.setText("");
+        bookNpagslModifyTxtField.setText("");
+        bookAnioModifyTxtField.setText("");
+ 
+    }
+    
+    private void articModificarModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articModificarModifyBtnActionPerformed
+
+        int fila = modifyTable.getSelectedRow();
+        
+        cleanAllModify();
+        
+        if ((articleModifyRadioBtn.isSelected()) && (fila >= 0)) {
+
+            articISSNModifyTxtField.setText(modifyTable.getValueAt(fila, 1).toString());
+            articTituloModifyTxtField.setText(modifyTable.getValueAt(fila, 2).toString());
+            articAutorModifyTxtField.setText(modifyTable.getValueAt(fila, 3).toString());
+            articRevistaModifyTxtField.setText(modifyTable.getValueAt(fila, 4).toString());
+            articPiniModifyTxtField.setText(modifyTable.getValueAt(fila, 5).toString());
+            articPFinModifyTxtField.setText(modifyTable.getValueAt(fila, 6).toString());
+            articMesModifyTxtField.setText(modifyTable.getValueAt(fila, 7).toString());
+            articAnioModifyTxtField.setText(modifyTable.getValueAt(fila, 8).toString());
+            
+        }
+
+    }//GEN-LAST:event_articModificarModifyBtnActionPerformed
+
+    public void updateBookModified(){
+         int fila = modifyTable.getSelectedRow();
+    if ((bookModifyRadioBtn.isSelected())) { 
+            if (bookTituloModifyTxtField.getText().equals("") | bookAutorModifyTxtField.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos: Titulo y autor");
+            }else {               
+                try {
+                    PreparedStatement pps = con.prepareStatement("UPDATE Libro SET ISBN='"+bookISBNModifyTxtField.getText()+"',Titulo='"+bookTituloModifyTxtField.getText()+"',Autor='"+bookAutorModifyTxtField.getText()+"',Editorial='"+bookEditorialModifyTxtField.getText()+"',Numero_pags='"+bookNpagslModifyTxtField.getText()+"',Anio='"+bookAnioModifyTxtField.getText()+"' WHERE idLibro='"+modifyTable.getValueAt(fila, 0).toString()+"'");
+                    pps.executeUpdate();
+                     JOptionPane.showMessageDialog(null,"Libro modificado correctamente");
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }}
+    }
+    
+    public void updateArticleModified(){
+    
+        int fila = modifyTable.getSelectedRow();
+     
+        if (articleModifyRadioBtn.isSelected()) {
+            if (articTituloModifyTxtField.getText().equals("") | articAutorModifyTxtField.getText().equals("") | articRevistaModifyTxtField.getText().equals("")) {   
+                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos: Titulo y autor");            
+            }else{
+                try {
+                PreparedStatement pps = con.prepareStatement("UPDATE Articulo SET ISSN='"+articISSNModifyTxtField.getText()+"',Titulo='"+articTituloModifyTxtField.getText()+"',Autor='"+articAutorModifyTxtField.getText()+"',Nom_revista='"+articRevistaModifyTxtField.getText()+"',Pag_inicio='"+articPiniModifyTxtField.getText()+"',Pag_fin='"+articPFinModifyTxtField.getText()+"',Mes='"+articMesModifyTxtField.getText()+"',Anio='"+articAnioModifyTxtField.getText()+"' WHERE idArticulo='"+modifyTable.getValueAt(fila, 0).toString()+"'");
+                pps.executeUpdate();
+                 JOptionPane.showMessageDialog(null,"Se ha modificado el Articulo correctamente");
+                
+                } catch (SQLException ex) {
+                    Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        }
+             
+    }
+    
+    
+    private void articSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articSaveModifyBtnActionPerformed
+        updateArticleModified();
+       
+        
+    }//GEN-LAST:event_articSaveModifyBtnActionPerformed
+
+    private void bookSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookSaveModifyBtnActionPerformed
+ 
+        updateBookModified();
+    }//GEN-LAST:event_bookSaveModifyBtnActionPerformed
+
+    private void bookModificarModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookModificarModifyBtnActionPerformed
+        
+        int fila = modifyTable.getSelectedRow();
+        if ((bookModifyRadioBtn.isSelected()) && (fila >= 0)) {
+           
+            bookISBNModifyTxtField.setText(modifyTable.getValueAt(fila, 1).toString());
+            bookTituloModifyTxtField.setText(modifyTable.getValueAt(fila, 2).toString());
+            bookAutorModifyTxtField.setText(modifyTable.getValueAt(fila, 3).toString());
+            bookEditorialModifyTxtField.setText(modifyTable.getValueAt(fila, 4).toString());
+            bookNpagslModifyTxtField.setText(modifyTable.getValueAt(fila, 5).toString());
+            bookAnioModifyTxtField.setText(modifyTable.getValueAt(fila, 6).toString());
+            
+        }
+    }//GEN-LAST:event_bookModificarModifyBtnActionPerformed
+
+    public void deleteRow(){
+         int fila = modifyTable.getSelectedRow();
+        
+        if (articleModifyRadioBtn.isSelected() && (fila >=0)) {
+            String valor = modifyTable.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = con.prepareStatement("DELETE FROM Articulo WHERE idArticulo='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                showArticleTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (bookModifyRadioBtn.isSelected() && (fila >=1)) {
+            String valor = modifyTable.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = con.prepareStatement("DELETE FROM Libro WHERE idLibro='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entrada eliminada correctamente");
+                showBookTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+}
+    
+    private void articDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articDeleteModifyBtnActionPerformed
+            deleteRow();
+    }//GEN-LAST:event_articDeleteModifyBtnActionPerformed
+
+    private void bookDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookDeleteModifyBtnActionPerformed
+            deleteRow();
+        
+    }//GEN-LAST:event_bookDeleteModifyBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1794,17 +2127,33 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JTextField YearArticuloRegistroTxtField;
     private javax.swing.JTextField YearLibroRegistroTxtField;
     private javax.swing.ButtonGroup addNotaBtnGroup;
+    private javax.swing.JTextField articAnioModifyTxtField;
+    private javax.swing.JTextField articAutorModifyTxtField;
+    private javax.swing.JButton articDeleteModifyBtn;
+    private javax.swing.JTextField articISSNModifyTxtField;
+    private javax.swing.JTextField articMesModifyTxtField;
+    private javax.swing.JButton articModificarModifyBtn;
+    private javax.swing.JTextField articPFinModifyTxtField;
+    private javax.swing.JTextField articPiniModifyTxtField;
+    private javax.swing.JTextField articRevistaModifyTxtField;
+    private javax.swing.JButton articSaveModifyBtn;
+    private javax.swing.JTextField articTituloModifyTxtField;
+    private javax.swing.JRadioButton articleModifyRadioBtn;
+    private javax.swing.JTextField bookAnioModifyTxtField;
+    private javax.swing.JTextField bookAutorModifyTxtField;
+    private javax.swing.JButton bookDeleteModifyBtn;
+    private javax.swing.JTextField bookEditorialModifyTxtField;
+    private javax.swing.JTextField bookISBNModifyTxtField;
+    private javax.swing.JButton bookModificarModifyBtn;
+    private javax.swing.JRadioButton bookModifyRadioBtn;
+    private javax.swing.JTextField bookNpagslModifyTxtField;
+    private javax.swing.JButton bookSaveModifyBtn;
+    private javax.swing.JTextField bookTituloModifyTxtField;
     private javax.swing.ButtonGroup chooseTmaNotaBtnGroup;
     private javax.swing.JButton createNotaNotasBtn;
     private javax.swing.JTextArea createNotaNotasTxtArea;
     private javax.swing.JButton exportarLibrosBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1822,7 +2171,6 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -1833,7 +2181,6 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
@@ -1851,22 +2198,9 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
     private javax.swing.JRadioButton libroSearchRadioBtn;
+    private javax.swing.ButtonGroup modifyBtnGroup;
+    private javax.swing.JTable modifyTable;
     private javax.swing.JButton searchAllArticleBtn;
     private javax.swing.JButton searchAllBookBtn;
     private javax.swing.JButton searchAllNotasBtn;
