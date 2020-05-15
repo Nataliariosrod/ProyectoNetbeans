@@ -4,12 +4,17 @@
  * and open the template in the editor.
  */
 package View;
+import Controller.ArticleRegistrationController;
 import Controller.ConexionBD;
+import Model.Libro;
+import dataBaseDAO.LibroDAOImpl;
+import java.awt.List;
 import java.awt.print.Book;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Biblioteca extends javax.swing.JFrame {
 
+    
     ConexionBD c = new ConexionBD();
     Connection con = c.getConexion();
     String attribute;
@@ -28,6 +34,7 @@ public class Biblioteca extends javax.swing.JFrame {
     /**
      * Creates new form insertBook
      */
+    
     public Biblioteca() {
         initComponents();
         setVisible(true);
@@ -38,8 +45,33 @@ public class Biblioteca extends javax.swing.JFrame {
         addItemsToArticleComboBox();
         addItemsToBookComboBox();
         addItemsToNotaComboBox();
-    }
+        setResizable(false);
+        //setLocationRelativeTo(null);
 
+    }
+     public Biblioteca(int login) {
+        initComponents();
+        setVisible(true);
+        //arreglar metodo createbuttongroup con if para que salga uno u otro
+        createButtonGroupBuscar();
+        createButtonGroupAddNota();
+        createButtonGroupModify();
+        addItemsToArticleComboBox();
+        addItemsToBookComboBox();
+        addItemsToNotaComboBox();
+        setResizable(false);
+        login = 1;
+        //setLocationRelativeTo(null);
+
+    }
+    
+
+    public void connectController(ArticleRegistrationController c){
+    
+       // searchAllBookBtn.addActionListener(c);
+        //searchAllBookBtn.setActionCommand("BUSCAR");
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,27 +138,10 @@ public class Biblioteca extends javax.swing.JFrame {
         searchAllBookBtn = new javax.swing.JButton();
         searchAllArticleBtn = new javax.swing.JButton();
         searchAllNotasBtn = new javax.swing.JButton();
-        AllAtributeNotaComboBox = new javax.swing.JComboBox<>();
+        allAtributeNotaComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         searchTable = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
-        PanelNotas = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        ApartadAniadirLibroEnNotasRadioBtn = new javax.swing.JRadioButton();
-        ApartadoAniadirArticuloEnNotasRadioBtn = new javax.swing.JRadioButton();
-        jLabel19 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        createNotaNotasTxtArea = new javax.swing.JTextArea();
-        jLabel25 = new javax.swing.JLabel();
-        valorEscritoAtributosSearchEnNotasTxtField = new javax.swing.JTextField();
-        searchPorAtributoEnNotasComboBox = new javax.swing.JComboBox<>();
-        createNotaNotasBtn = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        showLibArtEnNotasTable = new javax.swing.JTable();
-        TemaNotaTxtField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
         PanelModificar = new javax.swing.JPanel();
         PanelRegistroArticulo1 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -168,6 +183,36 @@ public class Biblioteca extends javax.swing.JFrame {
         bookModifyRadioBtn = new javax.swing.JRadioButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         modifyTable = new javax.swing.JTable();
+        PanelNotas = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        bookAddNotaRadioBtn = new javax.swing.JRadioButton();
+        articleAddNotaRadioBtn = new javax.swing.JRadioButton();
+        bookOrArtSearchBtn = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        showLibArtEnNotasTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        noteAsociarTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        addNoteTxtField = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        addNoteTxtArea = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        noteAddTable = new javax.swing.JTable();
+        modifyNoteBtn = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        saveNoteBtn = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -443,7 +488,7 @@ public class Biblioteca extends javax.swing.JFrame {
                     .addComponent(YearLibroRegistroTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(SaveLibroRegistroBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout RegistroDeTodoLayout = new javax.swing.GroupLayout(RegistroDeTodo);
@@ -459,12 +504,12 @@ public class Biblioteca extends javax.swing.JFrame {
         );
         RegistroDeTodoLayout.setVerticalGroup(
             RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistroDeTodoLayout.createSequentialGroup()
+            .addGroup(RegistroDeTodoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelRegistroArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(325, 325, 325))
+                .addGroup(RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(PanelRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelRegistroArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         PanelGeneral.addTab("Registro", RegistroDeTodo);
@@ -501,6 +546,12 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         });
 
+        searchComboTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchComboTxtFieldActionPerformed(evt);
+            }
+        });
+
         jLabel24.setText("Elija su criterio de búsqueda");
 
         exportarLibrosBtn.setText("Exportar");
@@ -519,6 +570,12 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         });
 
+        searchArticleComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchArticleComboBoxActionPerformed(evt);
+            }
+        });
+
         searchArticleBtn.setText("Buscar");
         searchArticleBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,6 +584,11 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         searchNotasBtn.setText("Buscar");
+        searchNotasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchNotasBtnActionPerformed(evt);
+            }
+        });
 
         searchAllBookBtn.setText("Buscar");
         searchAllBookBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -549,52 +611,55 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         });
 
+        allAtributeNotaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allAtributeNotaComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(18, 18, 18)
+                        .addComponent(exportarLibrosBtn))
                     .addComponent(jLabel24)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AllAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(allAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(88, 88, 88)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchBookBtn)
                             .addComponent(searchArticleBtn)
                             .addComponent(searchNotasBtn)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addGap(18, 18, 18)
-                        .addComponent(exportarLibrosBtn)
-                        .addGap(45, 45, 45))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addComponent(searchBookComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(79, 79, 79)
-                            .addComponent(searchComboTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(19, 19, 19)
-                                    .addComponent(libroSearchRadioBtn)
-                                    .addGap(27, 27, 27))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(searchAllBookBtn)
-                                    .addGap(18, 18, 18)))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ArticuloSearchRadioBtn)
-                                .addComponent(searchAllArticleBtn))
-                            .addGap(28, 28, 28)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(searchAllNotasBtn)
-                                .addComponent(NotaSearchRadioBtn)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(libroSearchRadioBtn)
+                            .addComponent(searchAllBookBtn))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ArticuloSearchRadioBtn)
+                            .addComponent(searchAllArticleBtn))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(NotaSearchRadioBtn))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(searchAllNotasBtn)))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -628,7 +693,7 @@ public class Biblioteca extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(searchArticleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AllAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(allAtributeNotaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exportarLibrosBtn)
@@ -656,181 +721,28 @@ public class Biblioteca extends javax.swing.JFrame {
             PanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBusquedaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
             .addGroup(PanelBusquedaLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(221, 221, 221)
                 .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
         PanelBusquedaLayout.setVerticalGroup(
             PanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBusquedaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(PanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         PanelGeneral.addTab("Búsqueda", PanelBusqueda);
-
-        PanelNotas.setBackground(new java.awt.Color(255, 204, 204));
-
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
-
-        jLabel18.setText("¿En qué apartado desea añadirla?");
-
-        ApartadAniadirLibroEnNotasRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
-        ApartadAniadirLibroEnNotasRadioBtn.setSelected(true);
-        ApartadAniadirLibroEnNotasRadioBtn.setText("Libro");
-        ApartadAniadirLibroEnNotasRadioBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ApartadAniadirLibroEnNotasRadioBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApartadAniadirLibroEnNotasRadioBtnActionPerformed(evt);
-            }
-        });
-
-        ApartadoAniadirArticuloEnNotasRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
-        ApartadoAniadirArticuloEnNotasRadioBtn.setText("Articulo");
-        ApartadoAniadirArticuloEnNotasRadioBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel19.setText("Elija un tema para su nota");
-
-        createNotaNotasTxtArea.setColumns(20);
-        createNotaNotasTxtArea.setRows(5);
-        jScrollPane2.setViewportView(createNotaNotasTxtArea);
-
-        jLabel25.setText("Busque al que desee añadirla");
-
-        createNotaNotasBtn.setText("Guardar");
-        createNotaNotasBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createNotaNotasBtnActionPerformed(evt);
-            }
-        });
-
-        showLibArtEnNotasTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane4.setViewportView(showLibArtEnNotasTable);
-
-        TemaNotaTxtField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TemaNotaTxtFieldActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Modificar");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel25)
-                .addGap(18, 18, 18)
-                .addComponent(searchPorAtributoEnNotasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(valorEscritoAtributosSearchEnNotasTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel18)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(ApartadAniadirLibroEnNotasRadioBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(ApartadoAniadirArticuloEnNotasRadioBtn)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(createNotaNotasBtn))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(TemaNotaTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel25)
-                    .addComponent(searchPorAtributoEnNotasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorEscritoAtributosSearchEnNotasTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ApartadoAniadirArticuloEnNotasRadioBtn)
-                    .addComponent(ApartadAniadirLibroEnNotasRadioBtn))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TemaNotaTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(createNotaNotasBtn)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
-        );
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel20.setText("¿Desea añadir una nota a algun libro o articulo?");
-
-        javax.swing.GroupLayout PanelNotasLayout = new javax.swing.GroupLayout(PanelNotas);
-        PanelNotas.setLayout(PanelNotasLayout);
-        PanelNotasLayout.setHorizontalGroup(
-            PanelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelNotasLayout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jLabel20)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        PanelNotasLayout.setVerticalGroup(
-            PanelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelNotasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        PanelGeneral.addTab("Notas", PanelNotas);
 
         PanelModificar.setBackground(new java.awt.Color(204, 153, 255));
 
@@ -969,13 +881,13 @@ public class Biblioteca extends javax.swing.JFrame {
                             .addComponent(jLabel36)
                             .addComponent(articRevistaModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(articAnioModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 35, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroArticulo1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(articDeleteModifyBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(articModificarModifyBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addComponent(articSaveModifyBtn)))
                 .addContainerGap())
         );
@@ -1077,22 +989,21 @@ public class Biblioteca extends javax.swing.JFrame {
                         .addComponent(bookAnioModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelRegistroLibro2Layout.createSequentialGroup()
-                        .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                    .addGap(29, 29, 29)
-                                    .addComponent(jLabel48)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(bookEditorialModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
-                                    .addComponent(jLabel49)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(bookNpagslModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                .addComponent(jLabel49)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bookNpagslModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
                                 .addComponent(bookModificarModifyBtn)
-                                .addGap(31, 31, 31)
-                                .addComponent(bookSaveModifyBtn)))
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(bookSaveModifyBtn))
+                            .addGroup(PanelRegistroLibro2Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel48)
+                                .addGap(18, 18, 18)
+                                .addComponent(bookEditorialModifyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
         PanelRegistroLibro2Layout.setVerticalGroup(
             PanelRegistroLibro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1144,8 +1055,9 @@ public class Biblioteca extends javax.swing.JFrame {
             PanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelModificarLayout.createSequentialGroup()
                 .addComponent(PanelRegistroArticulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelRegistroLibro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelRegistroLibro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(PanelModificarLayout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -1153,15 +1065,328 @@ public class Biblioteca extends javax.swing.JFrame {
         PanelModificarLayout.setVerticalGroup(
             PanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelModificarLayout.createSequentialGroup()
-                .addGroup(PanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelRegistroArticulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelRegistroLibro2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE))
+                    .addComponent(PanelRegistroLibro2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         PanelGeneral.addTab("Modificar", PanelModificar);
+
+        PanelNotas.setBackground(new java.awt.Color(255, 204, 204));
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+
+        jLabel18.setText("¿En qué apartado desea añadirla?");
+
+        bookAddNotaRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
+        bookAddNotaRadioBtn.setSelected(true);
+        bookAddNotaRadioBtn.setText("Libro");
+        bookAddNotaRadioBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bookAddNotaRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookAddNotaRadioBtnActionPerformed(evt);
+            }
+        });
+
+        articleAddNotaRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
+        articleAddNotaRadioBtn.setText("Articulo");
+        articleAddNotaRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                articleAddNotaRadioBtnActionPerformed(evt);
+            }
+        });
+
+        bookOrArtSearchBtn.setText("Buscar");
+        bookOrArtSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookOrArtSearchBtnActionPerformed(evt);
+            }
+        });
+
+        showLibArtEnNotasTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(showLibArtEnNotasTable);
+
+        noteAsociarTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(noteAsociarTable);
+
+        jButton1.setText("Buscar notas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Seleccione las filas que desea unir");
+
+        jButton2.setText("Asociar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("y pulse asociar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bookAddNotaRadioBtn)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(articleAddNotaRadioBtn)
+                                .addGap(63, 63, 63)
+                                .addComponent(bookOrArtSearchBtn))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel21)
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(53, 53, 53))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(14, 14, 14)
+                        .addComponent(bookAddNotaRadioBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(articleAddNotaRadioBtn)
+                            .addComponent(bookOrArtSearchBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(jButton2))
+                        .addGap(79, 79, 79)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout PanelNotasLayout = new javax.swing.GroupLayout(PanelNotas);
+        PanelNotas.setLayout(PanelNotasLayout);
+        PanelNotasLayout.setHorizontalGroup(
+            PanelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelNotasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 779, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelNotasLayout.setVerticalGroup(
+            PanelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelNotasLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        PanelGeneral.addTab("Asociar", PanelNotas);
+
+        jPanel5.setBackground(new java.awt.Color(255, 204, 51));
+
+        jLabel19.setText("Añada un tema para su nota");
+
+        jLabel23.setText("Añada la descripcion de su nota");
+
+        addNoteTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNoteTxtFieldActionPerformed(evt);
+            }
+        });
+
+        addNoteTxtArea.setColumns(20);
+        addNoteTxtArea.setRows(5);
+        jScrollPane3.setViewportView(addNoteTxtArea);
+
+        noteAddTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(noteAddTable);
+
+        modifyNoteBtn.setText("Modificar");
+        modifyNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyNoteBtnActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        saveNoteBtn.setText("Guardar");
+        saveNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNoteBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel25.setText("Puede buscar notas ya existentes");
+
+        jButton6.setText("Eliminar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Guardar cambios");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addNoteTxtField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(28, 28, 28)
+                        .addComponent(modifyNoteBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addGap(130, 130, 130))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(135, 135, 135))))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(saveNoteBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addComponent(addNoteTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel23)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saveNoteBtn)
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(modifyNoteBtn)
+                    .addComponent(jButton6))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(78, 78, 78))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        PanelGeneral.addTab("Añada notas", jPanel3);
 
         jLabel1.setText("BIBLIOTECA");
 
@@ -1171,18 +1396,15 @@ public class Biblioteca extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(PanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel1))
+            .addComponent(PanelGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1234,8 +1456,8 @@ public class Biblioteca extends javax.swing.JFrame {
 }
     
     private void SaveArticuloRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveArticuloRegistroBtnActionPerformed
-   
-        saveArticles();
+          saveArticles();
+          cleanAllRegister();
 
     }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
 
@@ -1290,7 +1512,7 @@ public class Biblioteca extends javax.swing.JFrame {
             searchBookBtn.setVisible(false);
             searchAllBookBtn.setVisible(false);
             searchBookComboBox.setVisible(false);
-            AllAtributeNotaComboBox.setVisible(false);
+            allAtributeNotaComboBox.setVisible(false);
 
           }
         
@@ -1312,39 +1534,39 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bookAnioModifyTxtFieldActionPerformed
 
-    private void createNotaNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNotaNotasBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createNotaNotasBtnActionPerformed
-
-    private void SaveLibroRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLibroRegistroBtnActionPerformed
-        int nPag, Anio;
-         nPag = validaInt(PgNumLibroRegistroTxtField.getText());
-         Anio = validaInt(YearLibroRegistroTxtField.getText());
-         
+    
+    
+    private void insertarLibro(String ISBN, String titulo, String autor, String editorial, int n_pags, int anio){
+ 
          try {
-            PreparedStatement pps = con.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Autor, Editorial, Numero_pags, Anio) VALUES (?,?,?,?,?,?)");
-           
-            if (TituloLibroRegistroTxtField.getText().equals("") | AutorLibroRegistroTxtField.getText().equals("")){
-                
-                System.out.println("Error, ingrese titulo y autor");
-            
-            }else{
-         
-                pps.setString(1, ISBNLibroRegistroTxtField.getText());
-                pps.setString(2, TituloLibroRegistroTxtField.getText());
-                pps.setString(3, AutorLibroRegistroTxtField.getText());
-                pps.setString(4, EditorialLibroRegistroTxtField.getText());
-                pps.setInt(5, nPag);
-                pps.setInt(6, Anio);
-  
+            PreparedStatement pps = con.prepareStatement("{call insertarLibro(?,?,?,?,?,?)}");
+                pps.setString(1, ISBN);
+                pps.setString(2, titulo);
+                pps.setString(3, autor);
+                pps.setString(4, editorial);
+                pps.setInt(5, n_pags);
+                pps.setInt(6, anio); 
                 pps.executeUpdate();        
-                 
+                pps.close();
                 JOptionPane.showMessageDialog(null, "Datos guardados");
-            }   
+               
         } catch (SQLException ex) {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    
+    
+    }
+    private void SaveLibroRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLibroRegistroBtnActionPerformed
+       int n_pags = validaInt(PgNumLibroRegistroTxtField.getText());
+       int anio = validaInt(YearLibroRegistroTxtField.getText());
+        
+        if (TituloLibroRegistroTxtField.getText().equals("") | AutorLibroRegistroTxtField.getText().equals("")){                
+                System.out.println("Error, ingrese titulo y autor");   
+        }else{
+        insertarLibro(ISBNLibroRegistroTxtField.getText(),TituloLibroRegistroTxtField.getText(),AutorLibroRegistroTxtField.getText(),EditorialLibroRegistroTxtField.getText(),n_pags,anio);
+        }
+        cleanAllRegister();
     }//GEN-LAST:event_SaveLibroRegistroBtnActionPerformed
 
       public void showBookTable() {
@@ -1388,14 +1610,14 @@ public class Biblioteca extends javax.swing.JFrame {
         tablaLibro.addColumn("Id");
         tablaLibro.addColumn("ISBN");
         tablaLibro.addColumn("Titulo");
-        tablaLibro.addColumn("Nombre");
+        tablaLibro.addColumn("Autor");
         tablaLibro.addColumn("Editorial");
         tablaLibro.addColumn("Numero de paginas");
         tablaLibro.addColumn("Año");
 
         searchTable.setModel(tablaLibro);
             
-        String sql = "SELECT * FROM Libro WHERE " + attribute + "='" + value + "'";
+        String sql = "SELECT * FROM Libro WHERE "+attribute+"='"+value+"'";
             
         String columnasTabla [] = new String [7];
             
@@ -1501,15 +1723,14 @@ public class Biblioteca extends javax.swing.JFrame {
             DefaultTableModel tablaNota = new DefaultTableModel();
             tablaNota.addColumn("Id");
             tablaNota.addColumn("Tema");
-            tablaNota.addColumn("Libro");
-            tablaNota.addColumn("Articulo");
+            tablaNota.addColumn("Descripcion");
 
             
             searchTable.setModel(tablaNota);
             
             String sql = "{call listarTodoNotas}";
             
-            String columnasTabla [] = new String [7];
+            String columnasTabla [] = new String [3];
             
         try {   
             Statement st = con.createStatement();
@@ -1518,7 +1739,6 @@ public class Biblioteca extends javax.swing.JFrame {
                 columnasTabla [0] = rs.getString(1);
                 columnasTabla [1] = rs.getString(2);
                 columnasTabla [2] = rs.getString(3);
-                columnasTabla [3] = rs.getString(4);
         
                 tablaNota.addRow(columnasTabla);
             } 
@@ -1528,7 +1748,35 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
    
+    public void showNoteTableByAttribute (String value) {
+        DefaultTableModel tablaNota = new DefaultTableModel();
+        tablaNota.addColumn("Id");
+        tablaNota.addColumn("Tema");
+        tablaNota.addColumn("Descripcion");
+       ;
 
+        searchTable.setModel(tablaNota);
+            
+        String sql = "SELECT * FROM Nota WHERE " + attribute + "='" + value + "'";
+            
+        String columnasTabla [] = new String [3];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                columnasTabla [0] = rs.getString(1);
+                columnasTabla [1] = rs.getString(2);
+                columnasTabla [2] = rs.getString(3);
+        
+                tablaNota.addRow(columnasTabla);
+            } 
+            searchTable.setModel(tablaNota);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
     public void addItemsToBookComboBox() {
         searchBookComboBox.addItem("idLibro");
         searchBookComboBox.addItem("ISBN");
@@ -1553,10 +1801,10 @@ public class Biblioteca extends javax.swing.JFrame {
     }
      
         public void addItemsToNotaComboBox() {
-        AllAtributeNotaComboBox.addItem("idNota");
-        AllAtributeNotaComboBox.addItem("Tema_idTema");
-        AllAtributeNotaComboBox.addItem("Libro_idLibro");
-        AllAtributeNotaComboBox.addItem("Articulo_idArticulo");
+        allAtributeNotaComboBox.addItem("idNota");
+        allAtributeNotaComboBox.addItem("Tema");
+        allAtributeNotaComboBox.addItem("Descripcion");
+
 
     }
 
@@ -1572,13 +1820,14 @@ public class Biblioteca extends javax.swing.JFrame {
             searchBookBtn.setVisible(true);
             searchAllBookBtn.setVisible(true);
             searchBookComboBox.setVisible(true);
-            AllAtributeNotaComboBox.setVisible(false);
+            allAtributeNotaComboBox.setVisible(false);
   
     }
       
        public void createButtonGroupAddNota() {
-        addNotaBtnGroup.add(ApartadAniadirLibroEnNotasRadioBtn);
-        addNotaBtnGroup.add(ApartadoAniadirArticuloEnNotasRadioBtn);
+        addNotaBtnGroup.add(bookAddNotaRadioBtn);
+        addNotaBtnGroup.add(articleAddNotaRadioBtn);
+        
     }
        
        
@@ -1600,7 +1849,7 @@ public class Biblioteca extends javax.swing.JFrame {
      
      
     private void searchBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookBtnActionPerformed
-      
+
         attribute = searchBookComboBox.getSelectedItem().toString();
         showBookTableByAttribute(searchComboTxtField.getText());
         searchComboTxtField.setText("");
@@ -1617,8 +1866,6 @@ public class Biblioteca extends javax.swing.JFrame {
         
         if (libroSearchRadioBtn.isSelected()) {
              showBookTable();
-        } else {
-            
         }
         
     }//GEN-LAST:event_searchAllBookBtnActionPerformed
@@ -1649,7 +1896,7 @@ public class Biblioteca extends javax.swing.JFrame {
             searchBookBtn.setVisible(true);
             searchAllBookBtn.setVisible(true);
             searchBookComboBox.setVisible(true);
-            AllAtributeNotaComboBox.setVisible(false);
+            allAtributeNotaComboBox.setVisible(false);
           }
     }//GEN-LAST:event_libroSearchRadioBtnActionPerformed
 
@@ -1657,13 +1904,14 @@ public class Biblioteca extends javax.swing.JFrame {
 
         if(NotaSearchRadioBtn.isSelected()) { 
             searchArticleComboBox.setVisible(false);
+            searchBookComboBox.setVisible(false);
             searchAllArticleBtn.setVisible(false);
             searchAllNotasBtn.setVisible(true);
             searchArticleBtn.setVisible(false);
             searchNotasBtn.setVisible(true);
             searchBookBtn.setVisible(false);
             searchAllBookBtn.setVisible(false);
-        AllAtributeNotaComboBox.setVisible(true);
+        allAtributeNotaComboBox.setVisible(true);
         }
     }//GEN-LAST:event_NotaSearchRadioBtnActionPerformed
 
@@ -1736,14 +1984,13 @@ public class Biblioteca extends javax.swing.JFrame {
             Statement stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Nota");
             strBuf = new StringBuffer();            
-            FileWriter fw = new FileWriter(new File("Notas.txt" ));
+            FileWriter fw = new FileWriter(new File("Notas.txt"));
             String data_row = "";                          
             while(rs.next()){
                 data_row = "\n";
                 data_row += rs.getInt("idNota");
-                 data_row += "," + rs.getString("Tema_idTema").trim();
-                data_row += "," + rs.getString("Libro_idLibro").trim();
-                data_row += "," + rs.getString("Articulo_idArticulo").trim();
+                 data_row += "," + rs.getString("Tema").trim();
+                data_row += "," + rs.getString("Descripcion").trim();
                 fw.write(data_row);
             }
             fw.close();
@@ -1769,20 +2016,129 @@ public class Biblioteca extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_exportarLibrosBtnActionPerformed
+public void searchAllArticlesAddNotes(){
+    if(articleAddNotaRadioBtn.isSelected()){
+        DefaultTableModel articleTable = new DefaultTableModel();
+        articleTable.addColumn("Id");
+        articleTable.addColumn("ISSN");
+        articleTable.addColumn("Titulo");
+        articleTable.addColumn("Autor");
+        articleTable.addColumn("Nom_revista");
+        articleTable.addColumn("Pag_inicio");
+        articleTable.addColumn("Pag_fin");
+        articleTable.addColumn("Mes");
+        articleTable.addColumn("Año");
+        
 
+        showLibArtEnNotasTable.setModel(articleTable);
+            
+        try {  
+            CallableStatement cst = con.prepareCall("{call listarTodoArticulos}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String [9];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    datos [5] = rs.getString(6);
+                    datos [6] = rs.getString(7);
+                    datos [7] = rs.getString(8);
+                    datos [8] = rs.getString(9);
+                    articleTable.addRow(datos);
+            } 
+            
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+         }
+    }
     
+    public void searchAllBookAddNotaTable(){
     
-    private void ApartadAniadirLibroEnNotasRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApartadAniadirLibroEnNotasRadioBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ApartadAniadirLibroEnNotasRadioBtnActionPerformed
+        if(bookAddNotaRadioBtn.isSelected()){
+        DefaultTableModel bookTable = new DefaultTableModel();
+        bookTable.addColumn("Id");
+        bookTable.addColumn("ISBN");
+        bookTable.addColumn("Titulo");
+        bookTable.addColumn("Autor");
+        bookTable.addColumn("Editorial");
+        bookTable.addColumn("Num_pags");
+        bookTable.addColumn("Año");   
 
-    private void ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ApartadoAniadirArticuloEnNotasRadioBtnActionPerformed
+        showLibArtEnNotasTable.setModel(bookTable);
+              
+        try {   
+            CallableStatement cst = con.prepareCall("{call listarTodoLibros}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String[7];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    datos [5] = rs.getString(6);
+                    datos [6] = rs.getString(7);
+                    bookTable.addRow(datos);
+            } 
+        
+            showLibArtEnNotasTable.setModel(bookTable);
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }     
+}
+    
+    private void bookAddNotaRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAddNotaRadioBtnActionPerformed
+        if(bookAddNotaRadioBtn.isSelected()){
+        DefaultTableModel bookTable = new DefaultTableModel();
+        bookTable.addColumn("Id");
+        bookTable.addColumn("ISBN");
+        bookTable.addColumn("Titulo");
+        bookTable.addColumn("Autor");
+        bookTable.addColumn("Editorial");
+        bookTable.addColumn("Num_pags");
+        bookTable.addColumn("Año");   
 
-    private void TemaNotaTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TemaNotaTxtFieldActionPerformed
+        showLibArtEnNotasTable.setModel(bookTable);
+              
+        try {   
+            CallableStatement cst = con.prepareCall("{call listarTodoLibros}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String[7];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    datos [3] = rs.getString(4);
+                    datos [4] = rs.getString(5);
+                    datos [5] = rs.getString(6);
+                    datos [6] = rs.getString(7);
+                    bookTable.addRow(datos);
+            } 
+        
+            showLibArtEnNotasTable.setModel(bookTable);
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }     
+        
+    }//GEN-LAST:event_bookAddNotaRadioBtnActionPerformed
+
+    private void articleAddNotaRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleAddNotaRadioBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TemaNotaTxtFieldActionPerformed
+    }//GEN-LAST:event_articleAddNotaRadioBtnActionPerformed
 
     private void bookModifyRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookModifyRadioBtnActionPerformed
        
@@ -1889,6 +2245,7 @@ public class Biblioteca extends javax.swing.JFrame {
         modifyTable.setModel(articleTable);
             
         try {  
+
             CallableStatement cst = con.prepareCall("{call listarTodoArticulos}");
             cst.execute();
             ResultSet rs = cst.executeQuery();
@@ -1933,6 +2290,27 @@ public class Biblioteca extends javax.swing.JFrame {
         bookAnioModifyTxtField.setText("");
  
     }
+     public void cleanAllRegister() {
+        
+        ISBNLibroRegistroTxtField.setText("");
+        TituloLibroRegistroTxtField.setText("");
+        AutorLibroRegistroTxtField.setText("");
+        EditorialLibroRegistroTxtField.setText("");
+        PgNumLibroRegistroTxtField.setText("");
+        YearLibroRegistroTxtField.setText("");
+        
+        
+        ISSNArticuloRegistroTxtField.setText("");
+        TituloArticuloRegistroTxtField.setText("");
+        AutorArticuloRegistroTxtField.setText("");
+        RevistaArticuloRegistroTxtField.setText("");
+        PInicioArticuloRegistroTxtField.setText("");
+        PFinArticuloRegistroTxtField.setText("");
+        MesArticuloRegistroTxtField.setText("");
+        YearArticuloRegistroTxtField.setText("");
+ 
+    }
+    
     
     private void articModificarModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articModificarModifyBtnActionPerformed
 
@@ -1997,8 +2375,8 @@ public class Biblioteca extends javax.swing.JFrame {
     
     private void articSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articSaveModifyBtnActionPerformed
         updateArticleModified();
-       
-        
+        searchAllArticlesModify();
+      
     }//GEN-LAST:event_articSaveModifyBtnActionPerformed
 
     private void bookSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookSaveModifyBtnActionPerformed
@@ -2021,10 +2399,10 @@ public class Biblioteca extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bookModificarModifyBtnActionPerformed
 
-    public void deleteRow(){
+    public void deleteRowArticle(){
          int fila = modifyTable.getSelectedRow();
         
-        if (articleModifyRadioBtn.isSelected() && (fila >=0)) {
+        if ((fila >=0)) {
             String valor = modifyTable.getValueAt(fila, 0).toString();
             try {
                 PreparedStatement pps = con.prepareStatement("DELETE FROM Articulo WHERE idArticulo='"+valor+"'");
@@ -2034,7 +2412,30 @@ public class Biblioteca extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if (bookModifyRadioBtn.isSelected() && (fila >=1)) {
+        }
+}
+    
+    
+    public void deleteRowNote(){
+         int fila = noteAddTable.getSelectedRow();
+        
+        if ((fila >=0)) {
+            String valor = noteAddTable.getValueAt(fila, 0).toString();
+            try {
+                PreparedStatement pps = con.prepareStatement("DELETE FROM Nota WHERE idNota='"+valor+"'");
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Eliminada correctamente");
+                showArticleTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+}
+    
+    public void deleteRowBook(){
+        
+        int fila = modifyTable.getSelectedRow();
+         if ((fila >=0)) {
             String valor = modifyTable.getValueAt(fila, 0).toString();
             try {
                 PreparedStatement pps = con.prepareStatement("DELETE FROM Libro WHERE idLibro='"+valor+"'");
@@ -2045,20 +2446,272 @@ public class Biblioteca extends javax.swing.JFrame {
                 Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-}
+    
+    }
     
     private void articDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articDeleteModifyBtnActionPerformed
-            deleteRow();
+            deleteRowArticle();
+            searchAllArticlesModify();
     }//GEN-LAST:event_articDeleteModifyBtnActionPerformed
 
     private void bookDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookDeleteModifyBtnActionPerformed
-            deleteRow();
+            deleteRowBook();
         
     }//GEN-LAST:event_bookDeleteModifyBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
+    private void bookOrArtSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookOrArtSearchBtnActionPerformed
+        
+        if (articleAddNotaRadioBtn.isSelected()) {
+            searchAllArticlesAddNotes();
+        }else if (bookAddNotaRadioBtn.isSelected()) {
+            searchAllBookAddNotaTable();
+        }
+        
+         
+    }//GEN-LAST:event_bookOrArtSearchBtnActionPerformed
+
+    private void searchNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchNotasBtnActionPerformed
+       
+        attribute = allAtributeNotaComboBox.getSelectedItem().toString();
+        showNoteTableByAttribute(searchComboTxtField.getText());
+        searchComboTxtField.setText("");
+    }//GEN-LAST:event_searchNotasBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ 
+        DefaultTableModel noteTable = new DefaultTableModel();
+        noteTable.addColumn("IdNota");
+        noteTable.addColumn("Tema");
+        noteTable.addColumn("Descripcion");
+        
+
+        noteAsociarTable.setModel(noteTable);
+            
+        try {   
+            CallableStatement cst = con.prepareCall("{call listarTodoNotas}");
+            cst.execute();
+            ResultSet rs = cst.executeQuery();
+            String datos [] = new String[3];
+            while (rs.next()) {               
+                    datos [0] = rs.getString(1);
+                    datos [1] = rs.getString(2);
+                    datos [2] = rs.getString(3);
+                    noteTable.addRow(datos);
+            } 
+        
+            noteAsociarTable.setModel(noteTable);
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       int a, b;
+        
+        if (bookAddNotaRadioBtn.isSelected()) {
+        int fila1 = showLibArtEnNotasTable.getSelectedRow();
+        int fila2 = noteAsociarTable.getSelectedRow();
+        String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
+        String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
+        a = validaInt(valor1);
+        b = validaInt(valor2);
+        if (fila1 >=0 && fila2 >= 0) {   
+            asociarLibro(a, b);
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
+        }}else if(articleAddNotaRadioBtn.isSelected()){
+        
+           int fila1 = showLibArtEnNotasTable.getSelectedRow();
+        int fila2 = noteAsociarTable.getSelectedRow();
+        String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
+        String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
+        a = validaInt(valor1);
+        b = validaInt(valor2);
+        if (fila1 >=0 && fila2 >= 0) {   
+            asociarArticulo(a, b);
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
+        } 
+            
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void addNoteTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNoteTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addNoteTxtFieldActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        deleteRowNote();
+        
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        showNoteTableAddNote();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void modifyNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyNoteBtnActionPerformed
+     
+        int fila = noteAddTable.getSelectedRow();
+
+        if ((fila >= 0)) {
+           
+            addNoteTxtField.setText(noteAddTable.getValueAt(fila, 1).toString());
+            addNoteTxtArea.setText(noteAddTable.getValueAt(fila, 2).toString());
+       
+        }else if ((fila < 0)) {
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione primero un Actor");
+        }
+ 
+        
+    }//GEN-LAST:event_modifyNoteBtnActionPerformed
+
+    private void saveNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNoteBtnActionPerformed
+   
+            if (addNoteTxtField.getText().equals("") | addNoteTxtArea.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos");
+            }else{
+                addNota(addNoteTxtField.getText(), addNoteTxtArea.getText());
+        }
+        
+    }//GEN-LAST:event_saveNoteBtnActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+         int fila = noteAddTable.getSelectedRow();
+
+         if (addNoteTxtField.getText().equals("") | addNoteTxtArea.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos");
+         }else{
+ 
+                try {
+                    PreparedStatement pps = con.prepareStatement("UPDATE Nota SET Tema='"+addNoteTxtField.getText()+"',Descripcion='"+addNoteTxtArea.getText()+"' WHERE idNota='"+noteAddTable.getValueAt(fila, 0).toString()+"'");
+                    pps.executeUpdate();
+          
+                    
+                    JOptionPane.showMessageDialog(null,"Nota modificada correctamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+    
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void allAtributeNotaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allAtributeNotaComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_allAtributeNotaComboBoxActionPerformed
+
+    private void searchArticleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchArticleComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchArticleComboBoxActionPerformed
+
+    private void searchComboTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchComboTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchComboTxtFieldActionPerformed
+
+    
+     private void addNota (String tema,String descripcion) {
+        try {  
+            CallableStatement cst = con.prepareCall("{CALL insertarNota(?,?)}");
+            cst.setString(1, tema);
+            cst.setString(2, descripcion);
+            cst.execute();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Nota insertada correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+    }
+    
+    
+    
+    public void showNoteTableAddNote() {
+            DefaultTableModel tablaNota = new DefaultTableModel();
+            tablaNota.addColumn("Id");
+            tablaNota.addColumn("Tema");
+            tablaNota.addColumn("Descripcion");
+
+            
+            noteAddTable.setModel(tablaNota);
+            
+            String sql = "{call listarTodoNotas}";
+            
+            String columnasTabla [] = new String [3];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                columnasTabla [0] = rs.getString(1);
+                columnasTabla [1] = rs.getString(2);
+                columnasTabla [2] = rs.getString(3);
+        
+                tablaNota.addRow(columnasTabla);
+            } 
+            noteAddTable.setModel(tablaNota);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
+    
+    private void asociarLibro(int idNota,int idLibro) {
+        try {  
+            CallableStatement cst = con.prepareCall("{CALL asociarLibro(?,?)}");
+            cst.setInt(1, idNota);
+            cst.setInt(2, idLibro);
+            cst.execute();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Asociados correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     private void asociarArticulo(int idNota,int idArticulo) {
+        try {  
+            CallableStatement cst = con.prepareCall("{CALL asociarArticulo(?,?)}");
+            cst.setInt(1, idNota);
+            cst.setInt(2, idArticulo);
+            cst.execute();
+            cst.close();
+            JOptionPane.showMessageDialog(null, "Asociados correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+  /*  public void selectedTemaAddNota(){
+    
+       // if (temaAddNotaComboBox.getItemAt())) {
+            try {
+                
+                PreparedStatement pps = con.prepareStatement("{call listarTodoTemasOrdenado}");
+                ResultSet rs =  pps.executeQuery();
+                ArrayList<Tema> listaTemas = new ArrayList<>();
+                while (rs.next()) {
+                   
+                  Tema t = new Tema();
+                  t.setIdTema(rs.getInt("idTema"));
+                  t.setTitulo(rs.getString("Titulo"));
+                  listaTemas.add(t);
+             }
+                listaTemas.forEach(listaTema -> temaAddNotaComboBox.addItem(listaTema.getTitulo()));
+           
+                } catch (SQLException ex) {
+                    Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+    
+    }*/
+    
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2095,65 +2748,69 @@ public class Biblioteca extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> AllAtributeNotaComboBox;
-    private javax.swing.JRadioButton ApartadAniadirLibroEnNotasRadioBtn;
-    private javax.swing.JRadioButton ApartadoAniadirArticuloEnNotasRadioBtn;
-    private javax.swing.JRadioButton ArticuloSearchRadioBtn;
-    private javax.swing.JTextField AutorArticuloRegistroTxtField;
-    private javax.swing.JTextField AutorLibroRegistroTxtField;
-    private javax.swing.JTextField EditorialLibroRegistroTxtField;
-    private javax.swing.JTextField ISBNLibroRegistroTxtField;
-    private javax.swing.JTextField ISSNArticuloRegistroTxtField;
-    private javax.swing.JTextField MesArticuloRegistroTxtField;
-    private javax.swing.JRadioButton NotaSearchRadioBtn;
-    private javax.swing.JTextField PFinArticuloRegistroTxtField;
-    private javax.swing.JTextField PInicioArticuloRegistroTxtField;
+    public javax.swing.JRadioButton ArticuloSearchRadioBtn;
+    public javax.swing.JTextField AutorArticuloRegistroTxtField;
+    public javax.swing.JTextField AutorLibroRegistroTxtField;
+    public javax.swing.JTextField EditorialLibroRegistroTxtField;
+    public javax.swing.JTextField ISBNLibroRegistroTxtField;
+    public javax.swing.JTextField ISSNArticuloRegistroTxtField;
+    public javax.swing.JTextField MesArticuloRegistroTxtField;
+    public javax.swing.JRadioButton NotaSearchRadioBtn;
+    public javax.swing.JTextField PFinArticuloRegistroTxtField;
+    public javax.swing.JTextField PInicioArticuloRegistroTxtField;
     private javax.swing.JPanel PanelBusqueda;
-    private javax.swing.JTabbedPane PanelGeneral;
+    public javax.swing.JTabbedPane PanelGeneral;
     private javax.swing.JPanel PanelModificar;
     private javax.swing.JPanel PanelNotas;
     private javax.swing.JPanel PanelRegistroArticulo;
-    private javax.swing.JPanel PanelRegistroArticulo1;
+    public javax.swing.JPanel PanelRegistroArticulo1;
     private javax.swing.JPanel PanelRegistroLibro;
     private javax.swing.JPanel PanelRegistroLibro2;
-    private javax.swing.JTextField PgNumLibroRegistroTxtField;
+    public javax.swing.JTextField PgNumLibroRegistroTxtField;
     private javax.swing.JPanel RegistroDeTodo;
-    private javax.swing.JTextField RevistaArticuloRegistroTxtField;
-    private javax.swing.JButton SaveArticuloRegistroBtn;
-    private javax.swing.JButton SaveLibroRegistroBtn;
-    private javax.swing.JTextField TemaNotaTxtField;
-    private javax.swing.JTextField TituloArticuloRegistroTxtField;
-    private javax.swing.JTextField TituloLibroRegistroTxtField;
-    private javax.swing.JTextField YearArticuloRegistroTxtField;
-    private javax.swing.JTextField YearLibroRegistroTxtField;
+    public javax.swing.JTextField RevistaArticuloRegistroTxtField;
+    public javax.swing.JButton SaveArticuloRegistroBtn;
+    public javax.swing.JButton SaveLibroRegistroBtn;
+    public javax.swing.JTextField TituloArticuloRegistroTxtField;
+    public javax.swing.JTextField TituloLibroRegistroTxtField;
+    public javax.swing.JTextField YearArticuloRegistroTxtField;
+    public javax.swing.JTextField YearLibroRegistroTxtField;
     private javax.swing.ButtonGroup addNotaBtnGroup;
-    private javax.swing.JTextField articAnioModifyTxtField;
-    private javax.swing.JTextField articAutorModifyTxtField;
-    private javax.swing.JButton articDeleteModifyBtn;
-    private javax.swing.JTextField articISSNModifyTxtField;
-    private javax.swing.JTextField articMesModifyTxtField;
-    private javax.swing.JButton articModificarModifyBtn;
-    private javax.swing.JTextField articPFinModifyTxtField;
-    private javax.swing.JTextField articPiniModifyTxtField;
-    private javax.swing.JTextField articRevistaModifyTxtField;
-    private javax.swing.JButton articSaveModifyBtn;
-    private javax.swing.JTextField articTituloModifyTxtField;
-    private javax.swing.JRadioButton articleModifyRadioBtn;
-    private javax.swing.JTextField bookAnioModifyTxtField;
-    private javax.swing.JTextField bookAutorModifyTxtField;
-    private javax.swing.JButton bookDeleteModifyBtn;
-    private javax.swing.JTextField bookEditorialModifyTxtField;
-    private javax.swing.JTextField bookISBNModifyTxtField;
-    private javax.swing.JButton bookModificarModifyBtn;
-    private javax.swing.JRadioButton bookModifyRadioBtn;
-    private javax.swing.JTextField bookNpagslModifyTxtField;
-    private javax.swing.JButton bookSaveModifyBtn;
-    private javax.swing.JTextField bookTituloModifyTxtField;
+    private javax.swing.JTextArea addNoteTxtArea;
+    private javax.swing.JTextField addNoteTxtField;
+    public javax.swing.JComboBox<String> allAtributeNotaComboBox;
+    public javax.swing.JTextField articAnioModifyTxtField;
+    public javax.swing.JTextField articAutorModifyTxtField;
+    public javax.swing.JButton articDeleteModifyBtn;
+    public javax.swing.JTextField articISSNModifyTxtField;
+    public javax.swing.JTextField articMesModifyTxtField;
+    public javax.swing.JButton articModificarModifyBtn;
+    public javax.swing.JTextField articPFinModifyTxtField;
+    public javax.swing.JTextField articPiniModifyTxtField;
+    public javax.swing.JTextField articRevistaModifyTxtField;
+    public javax.swing.JButton articSaveModifyBtn;
+    public javax.swing.JTextField articTituloModifyTxtField;
+    public javax.swing.JRadioButton articleAddNotaRadioBtn;
+    public javax.swing.JRadioButton articleModifyRadioBtn;
+    public javax.swing.JRadioButton bookAddNotaRadioBtn;
+    public javax.swing.JTextField bookAnioModifyTxtField;
+    public javax.swing.JTextField bookAutorModifyTxtField;
+    public javax.swing.JButton bookDeleteModifyBtn;
+    public javax.swing.JTextField bookEditorialModifyTxtField;
+    public javax.swing.JTextField bookISBNModifyTxtField;
+    public javax.swing.JButton bookModificarModifyBtn;
+    public javax.swing.JRadioButton bookModifyRadioBtn;
+    public javax.swing.JTextField bookNpagslModifyTxtField;
+    public javax.swing.JButton bookOrArtSearchBtn;
+    public javax.swing.JButton bookSaveModifyBtn;
+    public javax.swing.JTextField bookTituloModifyTxtField;
     private javax.swing.ButtonGroup chooseTmaNotaBtnGroup;
-    private javax.swing.JButton createNotaNotasBtn;
-    private javax.swing.JTextArea createNotaNotasTxtArea;
-    private javax.swing.JButton exportarLibrosBtn;
+    public javax.swing.JButton exportarLibrosBtn;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2167,7 +2824,9 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -2194,26 +2853,33 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JRadioButton libroSearchRadioBtn;
+    private javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JRadioButton libroSearchRadioBtn;
     private javax.swing.ButtonGroup modifyBtnGroup;
-    private javax.swing.JTable modifyTable;
-    private javax.swing.JButton searchAllArticleBtn;
-    private javax.swing.JButton searchAllBookBtn;
-    private javax.swing.JButton searchAllNotasBtn;
-    private javax.swing.JButton searchArticleBtn;
-    private javax.swing.JComboBox<String> searchArticleComboBox;
-    private javax.swing.JButton searchBookBtn;
-    private javax.swing.JComboBox<String> searchBookComboBox;
+    private javax.swing.JButton modifyNoteBtn;
+    public javax.swing.JTable modifyTable;
+    private javax.swing.JTable noteAddTable;
+    private javax.swing.JTable noteAsociarTable;
+    private javax.swing.JButton saveNoteBtn;
+    public javax.swing.JButton searchAllArticleBtn;
+    public javax.swing.JButton searchAllBookBtn;
+    public javax.swing.JButton searchAllNotasBtn;
+    public javax.swing.JButton searchArticleBtn;
+    public javax.swing.JComboBox<String> searchArticleComboBox;
+    public javax.swing.JButton searchBookBtn;
+    public javax.swing.JComboBox<String> searchBookComboBox;
     private javax.swing.ButtonGroup searchBtnGroup;
-    private javax.swing.JTextField searchComboTxtField;
-    private javax.swing.JButton searchNotasBtn;
-    private javax.swing.JComboBox<String> searchPorAtributoEnNotasComboBox;
-    private javax.swing.JTable searchTable;
-    private javax.swing.JTable showLibArtEnNotasTable;
-    private javax.swing.JTextField valorEscritoAtributosSearchEnNotasTxtField;
+    public javax.swing.JTextField searchComboTxtField;
+    public javax.swing.JButton searchNotasBtn;
+    public javax.swing.JTable searchTable;
+    public javax.swing.JTable showLibArtEnNotasTable;
     // End of variables declaration//GEN-END:variables
 }
