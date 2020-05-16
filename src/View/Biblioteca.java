@@ -6,39 +6,36 @@
 package View;
 import Controller.ArticleRegistrationController;
 import Controller.ConexionBD;
-import Model.Libro;
-import dataBaseDAO.LibroDAOImpl;
-import java.awt.List;
 import java.awt.print.Book;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import utilidades.Utilidades;
 /**
  *
  * @author Natalia
  */
 public class Biblioteca extends javax.swing.JFrame {
 
-    
+    /**
+     * Creamos las conexiones a la base de datos
+     */
     ConexionBD c = new ConexionBD();
     Connection con = c.getConexion();
     String attribute;
     
     /**
-     * Creates new form insertBook
+     * Crea el constructor de biblioteca
      */
     
     public Biblioteca() {
         initComponents();
         setVisible(true);
-        //arreglar metodo createbuttongroup con if para que salga uno u otro
         createButtonGroupBuscar();
         createButtonGroupAddNota();
         createButtonGroupModify();
@@ -46,13 +43,18 @@ public class Biblioteca extends javax.swing.JFrame {
         addItemsToBookComboBox();
         addItemsToNotaComboBox();
         setResizable(false);
-        //setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 
     }
+    
+    /**
+     * Crea el constructor de biblioteca con parametro para hacer el login
+     * @param login 
+     */
+    
      public Biblioteca(int login) {
         initComponents();
         setVisible(true);
-        //arreglar metodo createbuttongroup con if para que salga uno u otro
         createButtonGroupBuscar();
         createButtonGroupAddNota();
         createButtonGroupModify();
@@ -61,17 +63,10 @@ public class Biblioteca extends javax.swing.JFrame {
         addItemsToNotaComboBox();
         setResizable(false);
         login = 1;
-        //setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 
     }
     
-
-    public void connectController(ArticleRegistrationController c){
-    
-       // searchAllBookBtn.addActionListener(c);
-        //searchAllBookBtn.setActionCommand("BUSCAR");
-        
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,6 +192,8 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -1150,6 +1147,20 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jLabel21.setText("y pulse asociar");
 
+        jButton5.setText("Ver todas las notas de un libro");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Ver todas las notas de un articulo");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1183,6 +1194,12 @@ public class Biblioteca extends javax.swing.JFrame {
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addGap(53, 53, 53))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(56, 56, 56)
+                .addComponent(jButton7)
+                .addGap(68, 68, 68))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1209,7 +1226,11 @@ public class Biblioteca extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addComponent(jButton1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton7))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelNotasLayout = new javax.swing.GroupLayout(PanelNotas);
@@ -1442,32 +1463,29 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_YearLibroRegistroTxtFieldActionPerformed
 
-            
-    public int validaInt(String number){
-    int result = 0; //Valor default.
-    try{
-        if((number != null)){
-            result = Integer.parseInt(number);
-        }
-    }catch(NumberFormatException nfe){
-        //*No es numerico!
-    }
-    return result;
-}
     
+    /**
+     * Metodo que guarda un articulo al pulsar el boton
+     * Limpia todo el registro después de haberlo guardado
+     * @param evt 
+     */
     private void SaveArticuloRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveArticuloRegistroBtnActionPerformed
           saveArticles();
           cleanAllRegister();
 
     }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
 
+    /**
+     * Metodo que guarda un articulo en la base de datos
+     */
+    
     public void saveArticles(){
     
      int PIni, PFin, Mes, Anio;
-         PIni = validaInt(PInicioArticuloRegistroTxtField.getText());
-         PFin = validaInt(PFinArticuloRegistroTxtField.getText());
-         Mes = validaInt(MesArticuloRegistroTxtField.getText());
-         Anio = validaInt(YearArticuloRegistroTxtField.getText());
+         PIni = Utilidades.validaInt(PInicioArticuloRegistroTxtField.getText());
+         PFin = Utilidades.validaInt(PFinArticuloRegistroTxtField.getText());
+         Mes = Utilidades.validaInt(MesArticuloRegistroTxtField.getText());
+         Anio = Utilidades.validaInt(YearArticuloRegistroTxtField.getText());
          
          try {
             PreparedStatement pps = con.prepareStatement("INSERT INTO Articulo (ISSN, Titulo, Autor, Nom_revista, Pag_inicio, Pag_fin, Mes, Anio) VALUES (?,?,?,?,?,?,?,?)");
@@ -1501,6 +1519,11 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBookComboBoxActionPerformed
 
+    /**
+     * Metodo que pone visibles los botones adecuados para el radioButton de articulo
+     * @param evt 
+     */
+    
     private void ArticuloSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArticuloSearchRadioBtnActionPerformed
 
         if(ArticuloSearchRadioBtn.isSelected()) { 
@@ -1529,15 +1552,27 @@ public class Biblioteca extends javax.swing.JFrame {
     private void bookAutorModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAutorModifyTxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bookAutorModifyTxtFieldActionPerformed
-
+    
     private void bookAnioModifyTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAnioModifyTxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bookAnioModifyTxtFieldActionPerformed
 
-    
+    /**
+     * Metodo para insertar un libro en la base de datos
+     * @param ISBN String
+     * @param titulo String
+     * @param autor String
+     * @param editorial String
+     * @param n_pags int
+     * @param anio int
+     */
     
     private void insertarLibro(String ISBN, String titulo, String autor, String editorial, int n_pags, int anio){
  
+        if (Utilidades.validaString2(autor) == false) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un autor y un año valido");
+        }
+        
          try {
             PreparedStatement pps = con.prepareStatement("{call insertarLibro(?,?,?,?,?,?)}");
                 pps.setString(1, ISBN);
@@ -1557,9 +1592,14 @@ public class Biblioteca extends javax.swing.JFrame {
     
     
     }
+    
+    /**
+     * Metodo para guardar un Libro
+     * @param evt 
+     */
     private void SaveLibroRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLibroRegistroBtnActionPerformed
-       int n_pags = validaInt(PgNumLibroRegistroTxtField.getText());
-       int anio = validaInt(YearLibroRegistroTxtField.getText());
+       int n_pags = Utilidades.validaInt(PgNumLibroRegistroTxtField.getText());
+       int anio = Utilidades.validaInt(YearLibroRegistroTxtField.getText());
         
         if (TituloLibroRegistroTxtField.getText().equals("") | AutorLibroRegistroTxtField.getText().equals("")){                
                 System.out.println("Error, ingrese titulo y autor");   
@@ -1569,6 +1609,10 @@ public class Biblioteca extends javax.swing.JFrame {
         cleanAllRegister();
     }//GEN-LAST:event_SaveLibroRegistroBtnActionPerformed
 
+    /**
+     * Metodo para mostrar en la tabla los datos de los libros
+     */
+    
       public void showBookTable() {
             DefaultTableModel tablaLibro = new DefaultTableModel();
             tablaLibro.addColumn("Id");
@@ -1604,7 +1648,10 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
     
-    
+    /**
+     * Metodo para mostrar en la tabla los libros con el parametro introducido
+     * @param value String
+     */
    public void showBookTableByAttribute (String value) {
         DefaultTableModel tablaLibro = new DefaultTableModel();
         tablaLibro.addColumn("Id");
@@ -1641,6 +1688,10 @@ public class Biblioteca extends javax.swing.JFrame {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
+   
+   /**
+    * Metodo para mostrar en la tabla los articulos
+    */
    
     public void showArticleTable() {
             DefaultTableModel tablaArticulo = new DefaultTableModel();
@@ -1680,7 +1731,10 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
    
-   
+   /**
+    * Metodo para mostrar los articulos con el parametro introducido
+    * @param value String
+    */
    public void showArticleTableByAttribute (String value) {
         DefaultTableModel tablaArticulo = new DefaultTableModel();
         tablaArticulo.addColumn("Id");
@@ -1719,12 +1773,16 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
    
+   /**
+    * Metodo para mostrar las notas en la tabla
+    */
+   
     public void showNoteTable() {
             DefaultTableModel tablaNota = new DefaultTableModel();
             tablaNota.addColumn("Id");
             tablaNota.addColumn("Tema");
             tablaNota.addColumn("Descripcion");
-
+            
             
             searchTable.setModel(tablaNota);
             
@@ -1748,6 +1806,10 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
    
+    /**
+     * Metodo para mostrar las notas que tienen el parametro introducido
+     * @param value String
+     */
     public void showNoteTableByAttribute (String value) {
         DefaultTableModel tablaNota = new DefaultTableModel();
         tablaNota.addColumn("Id");
@@ -2516,8 +2578,8 @@ public void searchAllArticlesAddNotes(){
         int fila2 = noteAsociarTable.getSelectedRow();
         String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
         String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
-        a = validaInt(valor1);
-        b = validaInt(valor2);
+        a = Utilidades.validaInt(valor1);
+        b = Utilidades.validaInt(valor2);
         if (fila1 >=0 && fila2 >= 0) {   
             asociarLibro(a, b);
         }else {
@@ -2528,8 +2590,8 @@ public void searchAllArticlesAddNotes(){
         int fila2 = noteAsociarTable.getSelectedRow();
         String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
         String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
-        a = validaInt(valor1);
-        b = validaInt(valor2);
+        a = Utilidades.validaInt(valor1);
+        b = Utilidades.validaInt(valor2);
         if (fila1 >=0 && fila2 >= 0) {   
             asociarArticulo(a, b);
         }else {
@@ -2615,6 +2677,81 @@ public void searchAllArticlesAddNotes(){
         // TODO add your handling code here:
     }//GEN-LAST:event_searchComboTxtFieldActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        DefaultTableModel tablaLibro = new DefaultTableModel();
+            tablaLibro.addColumn("IdLibro");
+            tablaLibro.addColumn("Titulo");
+            tablaLibro.addColumn("Autor");
+            tablaLibro.addColumn("idNota");
+            tablaLibro.addColumn("Tema");
+            tablaLibro.addColumn("Descripcion ");
+            
+            
+            showLibArtEnNotasTable.setModel(tablaLibro);
+            
+            String sql = "{call buscarTodasNotasDeLibros}";
+            
+            String datos [] = new String [7];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                datos [5] = rs.getString(6);
+               
+                tablaLibro.addRow(datos);
+            } 
+            showLibArtEnNotasTable.setModel(tablaLibro);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        
+        DefaultTableModel tablaLibro = new DefaultTableModel();
+            tablaLibro.addColumn("IdArticulo");
+            tablaLibro.addColumn("Titulo");
+            tablaLibro.addColumn("Autor");
+            tablaLibro.addColumn("idNota");
+            tablaLibro.addColumn("Tema");
+            tablaLibro.addColumn("Descripcion ");
+            
+            noteAsociarTable.setModel(tablaLibro);
+            
+            //String sql = ("SELECT Articulo_tiene_Notas.idArticulo, Articulo.titulo, Articulo.autor, Articulo_tiene_Notas.idNota, Nota.tema, Nota.descripcion FROM Articulo, Articulo_tiene_Notas, Nota WHERE Articulo_tiene_Notas.idArticulo = Articulo.idArticulo");
+            String sql = ("{call buscarTodasNotasArticulos}");
+            
+            String datos [] = new String [6];
+            
+        try {   
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos [0] = rs.getString(1);
+                datos [1] = rs.getString(2);
+                datos [2] = rs.getString(3);
+                datos [3] = rs.getString(4);
+                datos [4] = rs.getString(5);
+                datos [5] = rs.getString(6);
+               
+                tablaLibro.addRow(datos);
+            } 
+            noteAsociarTable.setModel(tablaLibro);
+        } catch (SQLException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     
      private void addNota (String tema,String descripcion) {
         try {  
@@ -2661,31 +2798,36 @@ public void searchAllArticlesAddNotes(){
     }
     
     
-    private void asociarLibro(int idNota,int idLibro) {
-        try {  
-            CallableStatement cst = con.prepareCall("{CALL asociarLibro(?,?)}");
-            cst.setInt(1, idNota);
-            cst.setInt(2, idLibro);
-            cst.execute();
-            cst.close();
+    private void asociarLibro(int idN,int idL) {
+        
+        String sql = "insert into Libro_tiene_Notas (idNota, idLibro) values ((select idNota from Nota where idNota ='"+idL+"'),(select idLibro from Libro where idLibro = '"+idN +"'))";
+               
+        try {   
+            PreparedStatement pps = con.prepareStatement(sql);
+            pps.execute();
+            
             JOptionPane.showMessageDialog(null, "Asociados correctamente");
+            
         } catch (SQLException ex) {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
     }
     
-     private void asociarArticulo(int idNota,int idArticulo) {
-        try {  
-            CallableStatement cst = con.prepareCall("{CALL asociarArticulo(?,?)}");
-            cst.setInt(1, idNota);
-            cst.setInt(2, idArticulo);
-            cst.execute();
-            cst.close();
+    private void asociarArticulo(int idN,int idL) {
+        
+        String sql = "insert into Articulo_tiene_Notas (idNota, idArticulo) values ((select idNota from Nota where idNota ='"+idL+"'),(select idArticulo from Articulo where idArticulo = '"+idN +"'))";
+               
+        try {   
+            PreparedStatement pps = con.prepareStatement(sql);
+            pps.execute();
+            
             JOptionPane.showMessageDialog(null, "Asociados correctamente");
+            
         } catch (SQLException ex) {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
     }
+ 
     
   /*  public void selectedTemaAddNota(){
     
@@ -2810,7 +2952,9 @@ public void searchAllArticlesAddNotes(){
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
