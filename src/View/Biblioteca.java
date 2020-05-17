@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package View;
-import Controller.ArticleRegistrationController;
+
 import Controller.ConexionBD;
 import java.awt.print.Book;
 import java.io.File;
@@ -116,6 +116,7 @@ public class Biblioteca extends javax.swing.JFrame {
         PgNumLibroRegistroTxtField = new javax.swing.JTextField();
         YearLibroRegistroTxtField = new javax.swing.JTextField();
         SaveLibroRegistroBtn = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
         PanelBusqueda = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         searchBookComboBox = new javax.swing.JComboBox<>();
@@ -220,20 +221,20 @@ public class Biblioteca extends javax.swing.JFrame {
         PanelRegistroArticulo.setBackground(new java.awt.Color(153, 153, 255));
         PanelRegistroArticulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Registre su artículo");
 
         jLabel3.setText("ISSN");
 
-        jLabel4.setText("Titulo");
+        jLabel4.setText("Título*");
 
-        jLabel5.setText("Autor");
+        jLabel5.setText("Autor*");
 
-        jLabel6.setText("Revista");
+        jLabel6.setText("Revista*");
 
-        jLabel7.setText("Pagina de inicio");
+        jLabel7.setText("Página de inicio");
 
-        jLabel8.setText("Pagina de fin");
+        jLabel8.setText("Página de fin");
 
         jLabel9.setText("Mes");
 
@@ -364,18 +365,18 @@ public class Biblioteca extends javax.swing.JFrame {
         PanelRegistroLibro.setBackground(new java.awt.Color(153, 153, 255));
         PanelRegistroLibro.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Registre su libro");
 
         jLabel12.setText("ISBN");
 
-        jLabel13.setText("Titulo");
+        jLabel13.setText("Título*");
 
-        jLabel14.setText("Autor");
+        jLabel14.setText("Autor*");
 
         jLabel15.setText("Editorial");
 
-        jLabel16.setText("Numero de paginas");
+        jLabel16.setText("Número de paginas");
 
         jLabel17.setText("Año");
 
@@ -419,7 +420,7 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGroup(PanelRegistroLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroLibroLayout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addGap(0, 191, Short.MAX_VALUE))
+                        .addGap(0, 197, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLibroLayout.createSequentialGroup()
                         .addGroup(PanelRegistroLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel12)
@@ -433,7 +434,7 @@ public class Biblioteca extends javax.swing.JFrame {
                                 .addGroup(PanelRegistroLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(AutorLibroRegistroTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TituloLibroRegistroTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(150, Short.MAX_VALUE))))
+                                .addContainerGap(164, Short.MAX_VALUE))))
                     .addGroup(PanelRegistroLibroLayout.createSequentialGroup()
                         .addGroup(PanelRegistroLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelRegistroLibroLayout.createSequentialGroup()
@@ -446,7 +447,7 @@ public class Biblioteca extends javax.swing.JFrame {
                                     .addComponent(jLabel16))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(PgNumLibroRegistroTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(148, Short.MAX_VALUE))
+                        .addContainerGap(168, Short.MAX_VALUE))
                     .addGroup(PanelRegistroLibroLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
@@ -488,15 +489,22 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
+        jLabel27.setText("* campos obligatorios");
+
         javax.swing.GroupLayout RegistroDeTodoLayout = new javax.swing.GroupLayout(RegistroDeTodo);
         RegistroDeTodo.setLayout(RegistroDeTodoLayout);
         RegistroDeTodoLayout.setHorizontalGroup(
             RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistroDeTodoLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(PanelRegistroArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(PanelRegistroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(RegistroDeTodoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel27))
+                    .addGroup(RegistroDeTodoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(PanelRegistroArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(PanelRegistroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24))
         );
         RegistroDeTodoLayout.setVerticalGroup(
@@ -506,7 +514,9 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGroup(RegistroDeTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(PanelRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelRegistroArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addContainerGap())
         );
 
         PanelGeneral.addTab("Registro", RegistroDeTodo);
@@ -1089,7 +1099,7 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         articleAddNotaRadioBtn.setBackground(new java.awt.Color(255, 153, 153));
-        articleAddNotaRadioBtn.setText("Articulo");
+        articleAddNotaRadioBtn.setText("Artículo");
         articleAddNotaRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 articleAddNotaRadioBtnActionPerformed(evt);
@@ -1154,7 +1164,7 @@ public class Biblioteca extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Ver todas las notas de un articulo");
+        jButton7.setText("Ver todas las notas de un artículo");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -1179,21 +1189,23 @@ public class Biblioteca extends javax.swing.JFrame {
                                 .addGap(63, 63, 63)
                                 .addComponent(bookOrArtSearchBtn))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel21)
                                 .addGap(27, 27, 27)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))))))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
-                .addGap(53, 53, 53))
+                .addGap(61, 61, 61))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -1220,10 +1232,14 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(jButton2))
-                        .addGap(79, 79, 79)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addGap(84, 84, 84))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jButton1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -1255,7 +1271,7 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jLabel19.setText("Añada un tema para su nota");
 
-        jLabel23.setText("Añada la descripcion de su nota");
+        jLabel23.setText("Añada la descripción de su nota");
 
         addNoteTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1326,10 +1342,11 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addNoteTxtField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                .addComponent(addNoteTxtField, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1470,9 +1487,15 @@ public class Biblioteca extends javax.swing.JFrame {
      * @param evt 
      */
     private void SaveArticuloRegistroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveArticuloRegistroBtnActionPerformed
-          saveArticles();
+        if ((Utilidades.validaString(AutorArticuloRegistroTxtField.getText())== false)) {
+            JOptionPane.showMessageDialog(null,"El nombre del autor no puede tener números, por favor, introduzca solo letras.");
+        }else
+        if(ISSNArticuloRegistroTxtField.getText().toString().length()>45 | TituloArticuloRegistroTxtField.getText().toString().length()>45 | AutorArticuloRegistroTxtField.getText().toString().length()>45 | RevistaArticuloRegistroTxtField.getText().toString().length()>45 | PInicioArticuloRegistroTxtField.getText().toString().length()>45 | PFinArticuloRegistroTxtField.getText().toString().length()>45 | MesArticuloRegistroTxtField.getText().toString().length()>2 | YearArticuloRegistroTxtField.getText().toString().length()>4) {
+            JOptionPane.showMessageDialog(null, "por favor, introduzca valores válidos: ISSN, Titulo, Autor y Revista no pueden ser mayores de 45 caracteres; mes no puede ser mayor de 2 ni año mayor de 4");
+        }else{  
+        saveArticles();
           cleanAllRegister();
-
+        }
     }//GEN-LAST:event_SaveArticuloRegistroBtnActionPerformed
 
     /**
@@ -1492,7 +1515,7 @@ public class Biblioteca extends javax.swing.JFrame {
            
             if (TituloArticuloRegistroTxtField.getText().equals("") | AutorArticuloRegistroTxtField.getText().equals("") | RevistaArticuloRegistroTxtField.getText().equals("")){
                 
-                System.out.println("Error, ingrese titulo autor y revista");
+                JOptionPane.showMessageDialog(null,"Error, ingrese titulo, autor y revista");
             
             }else{
          
@@ -1569,9 +1592,9 @@ public class Biblioteca extends javax.swing.JFrame {
     
     private void insertarLibro(String ISBN, String titulo, String autor, String editorial, int n_pags, int anio){
  
-        if (Utilidades.validaString2(autor) == false) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un autor y un año valido");
-        }
+        if (Utilidades.validaString(autor) == false) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un autor valido");
+        }else{
         
          try {
             PreparedStatement pps = con.prepareStatement("{call insertarLibro(?,?,?,?,?,?)}");
@@ -1588,7 +1611,7 @@ public class Biblioteca extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
     
     
     }
@@ -1602,7 +1625,11 @@ public class Biblioteca extends javax.swing.JFrame {
        int anio = Utilidades.validaInt(YearLibroRegistroTxtField.getText());
         
         if (TituloLibroRegistroTxtField.getText().equals("") | AutorLibroRegistroTxtField.getText().equals("")){                
-                System.out.println("Error, ingrese titulo y autor");   
+                JOptionPane.showMessageDialog(null,"Error, ingrese titulo y autor");  
+        }else if(ISBNLibroRegistroTxtField.getText().toString().length()>45 | TituloLibroRegistroTxtField.getText().toString().length()>45 | AutorLibroRegistroTxtField.getText().toString().length()>45 | EditorialLibroRegistroTxtField.getText().toString().length()>45 | PgNumLibroRegistroTxtField.getText().toString().length()>45 | YearLibroRegistroTxtField.getText().toString().length()>4) {
+            JOptionPane.showMessageDialog(null, "por favor, introduzca valores válidos: ISBN, Titulo, Autor y Editorial no pueden ser mayores de 45 caracteres; ni año mayor de 4");
+        }else if ((Utilidades.validaString(AutorLibroRegistroTxtField.getText())== false)) {
+            JOptionPane.showMessageDialog(null,"El nombre del autor no puede tener números, por favor, introduzca solo letras.");
         }else{
         insertarLibro(ISBNLibroRegistroTxtField.getText(),TituloLibroRegistroTxtField.getText(),AutorLibroRegistroTxtField.getText(),EditorialLibroRegistroTxtField.getText(),n_pags,anio);
         }
@@ -1776,7 +1803,6 @@ public class Biblioteca extends javax.swing.JFrame {
    /**
     * Metodo para mostrar las notas en la tabla
     */
-   
     public void showNoteTable() {
             DefaultTableModel tablaNota = new DefaultTableModel();
             tablaNota.addColumn("Id");
@@ -1839,6 +1865,9 @@ public class Biblioteca extends javax.swing.JFrame {
         }  
     }
     
+    /**
+     * Metodo para añadir elementos a la comboBox de Libro
+     */
     public void addItemsToBookComboBox() {
         searchBookComboBox.addItem("idLibro");
         searchBookComboBox.addItem("ISBN");
@@ -1850,6 +1879,9 @@ public class Biblioteca extends javax.swing.JFrame {
    
     }
     
+    /**
+     * Metodo para añadir elementos a la comboBox de Articulo
+     */
      public void addItemsToArticleComboBox() {
          searchArticleComboBox.addItem("idArticulo");
         searchArticleComboBox.addItem("ISSN");
@@ -1861,15 +1893,20 @@ public class Biblioteca extends javax.swing.JFrame {
         searchArticleComboBox.addItem("Mes");
         searchArticleComboBox.addItem("Anio");
     }
-     
-        public void addItemsToNotaComboBox() {
+     /**
+     * Metodo para añadir elementos a la comboBox de Nota
+     */
+     public void addItemsToNotaComboBox() {
         allAtributeNotaComboBox.addItem("idNota");
         allAtributeNotaComboBox.addItem("Tema");
         allAtributeNotaComboBox.addItem("Descripcion");
 
 
     }
-
+        
+     /**
+      * Metodo para crear el buttonGroup con los radioButton de Buscar 
+      */   
       public void createButtonGroupBuscar() {
         searchBtnGroup.add(libroSearchRadioBtn);
         searchBtnGroup.add(ArticuloSearchRadioBtn);
@@ -1886,12 +1923,18 @@ public class Biblioteca extends javax.swing.JFrame {
   
     }
       
+      /**
+       * Metodo para crear el buttonGroup con los radioButton de Nota
+       */
+      
        public void createButtonGroupAddNota() {
         addNotaBtnGroup.add(bookAddNotaRadioBtn);
         addNotaBtnGroup.add(articleAddNotaRadioBtn);
-        
     }
        
+       /**
+        * Metodo para crear el ButtonGroup de Modificar
+        */
        
         public void createButtonGroupModify() {
         modifyBtnGroup.add(articleModifyRadioBtn);
@@ -1909,21 +1952,38 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }
      
-     
+     /**
+      * Metodo para buscar los libros por parametros introducidos
+      * @param evt 
+      */
     private void searchBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookBtnActionPerformed
-
+        if(searchComboTxtField.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Por favor, introduzca el dato que está buscando"); 
+        }else{
         attribute = searchBookComboBox.getSelectedItem().toString();
         showBookTableByAttribute(searchComboTxtField.getText());
-        searchComboTxtField.setText("");
+        searchComboTxtField.setText("");}
     }//GEN-LAST:event_searchBookBtnActionPerformed
 
+    /**
+     * Metodo para buscar los articulos por parametros introducidos
+     * @param evt 
+     */
+    
     private void searchArticleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchArticleBtnActionPerformed
-        
+        if(searchComboTxtField.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Por favor, introduzca el dato que está buscando"); 
+        }else{
          attribute = searchArticleComboBox.getSelectedItem().toString();
         showArticleTableByAttribute(searchComboTxtField.getText());
-        searchComboTxtField.setText("");
+        searchComboTxtField.setText("");}
     }//GEN-LAST:event_searchArticleBtnActionPerformed
 
+    /**
+     * Metodo para mostrar la tabla si el radiobutton de libro esta seleccionado
+     * @param evt 
+     */
+    
     private void searchAllBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllBookBtnActionPerformed
         
         if (libroSearchRadioBtn.isSelected()) {
@@ -1932,7 +1992,10 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchAllBookBtnActionPerformed
 
-
+    /**
+     * Metodo para mostrar la tabla si el radiobutton de articulo esta seleccionado
+     * @param evt 
+     */
     private void searchAllArticleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllArticleBtnActionPerformed
         if (ArticuloSearchRadioBtn.isSelected()) {
                 showArticleTable();        
@@ -1940,6 +2003,11 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchAllArticleBtnActionPerformed
 
+    /**
+     * Metodo para mostrar la tabla si el radiobutton de nota esta seleccionado 
+     * @param evt 
+     */
+    
     private void searchAllNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAllNotasBtnActionPerformed
         
         if (NotaSearchRadioBtn.isSelected()) {
@@ -1948,6 +2016,11 @@ public class Biblioteca extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchAllNotasBtnActionPerformed
 
+    /**
+     * Metodo para poner visibles los botones de libro
+     * @param evt 
+     */
+    
     private void libroSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libroSearchRadioBtnActionPerformed
         if (libroSearchRadioBtn.isSelected()) {
             searchArticleComboBox.setVisible(false);
@@ -1962,6 +2035,10 @@ public class Biblioteca extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_libroSearchRadioBtnActionPerformed
 
+    /**
+     * Metodo para poner visibles los botones de nota
+     * @param evt 
+     */
     private void NotaSearchRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotaSearchRadioBtnActionPerformed
 
         if(NotaSearchRadioBtn.isSelected()) { 
@@ -1977,6 +2054,10 @@ public class Biblioteca extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_NotaSearchRadioBtnActionPerformed
 
+    /**
+     * Metodo para exportar los libros
+     */
+    
     public void exportBooks(){
     ResultSet rs = null;
         StringBuffer strBuf = null;        
@@ -2007,6 +2088,9 @@ public class Biblioteca extends javax.swing.JFrame {
         }        
     }
     
+    /**
+     * Metodo para exportar los articulos
+     */
     public void exportArticles(){
     ResultSet rs = null;
         StringBuffer strBuf = null;        
@@ -2039,6 +2123,9 @@ public class Biblioteca extends javax.swing.JFrame {
         }        
     }
     
+    /**
+     * Metodo para exportar las notas
+     */
      public void exportNotes(){
     ResultSet rs = null;
         StringBuffer strBuf = null;        
@@ -2066,6 +2153,11 @@ public class Biblioteca extends javax.swing.JFrame {
         }        
     }
     
+     /**
+      * Metodo que acciona el boton para exportar dependiendo de lo seleccionado
+      * @param evt 
+      */
+     
     private void exportarLibrosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarLibrosBtnActionPerformed
 
             if(libroSearchRadioBtn.isSelected()){
@@ -2078,7 +2170,11 @@ public class Biblioteca extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_exportarLibrosBtnActionPerformed
-public void searchAllArticlesAddNotes(){
+    
+    /**
+     * Metodo para listar los articulos 
+     */
+    public void searchAllArticlesAddNotes(){
     if(articleAddNotaRadioBtn.isSelected()){
         DefaultTableModel articleTable = new DefaultTableModel();
         articleTable.addColumn("Id");
@@ -2119,7 +2215,9 @@ public void searchAllArticlesAddNotes(){
  
          }
     }
-    
+    /**
+     * Metodo para listar los libros
+     */
     public void searchAllBookAddNotaTable(){
     
         if(bookAddNotaRadioBtn.isSelected()){
@@ -2158,6 +2256,10 @@ public void searchAllArticlesAddNotes(){
     }     
 }
     
+    /**
+     * Metodo para listar todos los libros
+     * @param evt 
+     */
     private void bookAddNotaRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAddNotaRadioBtnActionPerformed
         if(bookAddNotaRadioBtn.isSelected()){
         DefaultTableModel bookTable = new DefaultTableModel();
@@ -2202,6 +2304,11 @@ public void searchAllArticlesAddNotes(){
         // TODO add your handling code here:
     }//GEN-LAST:event_articleAddNotaRadioBtnActionPerformed
 
+    
+    /**
+     * Metodo para listar todos los libros si esta seleccionado el radioButton Libro
+     * @param evt 
+     */
     private void bookModifyRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookModifyRadioBtnActionPerformed
        
         if(bookModifyRadioBtn.isSelected()){
@@ -2261,6 +2368,11 @@ public void searchAllArticlesAddNotes(){
     }   }  
     }//GEN-LAST:event_bookModifyRadioBtnActionPerformed
 
+    /**
+     * Metodo para listar los articulos si esta seleccionado el radioButton Articulo
+     * @param evt 
+     */
+    
     private void articleModifyRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articleModifyRadioBtnActionPerformed
         if (articleModifyRadioBtn.isSelected()) {
         articISSNModifyTxtField.setEditable(true);
@@ -2287,6 +2399,9 @@ public void searchAllArticlesAddNotes(){
         }
     }//GEN-LAST:event_articleModifyRadioBtnActionPerformed
 
+    /**
+     * Metodo para listar los articulos
+     */
     public void searchAllArticlesModify(){
     
         cleanAllModify();
@@ -2333,6 +2448,9 @@ public void searchAllArticlesAddNotes(){
     
   }
     
+    /**
+     * Metodo para limpiar los textField despues de introducir datos
+     */
     public void cleanAllModify() {
         
         articISSNModifyTxtField.setText("");
@@ -2352,7 +2470,11 @@ public void searchAllArticlesAddNotes(){
         bookAnioModifyTxtField.setText("");
  
     }
-     public void cleanAllRegister() {
+    
+    /**
+     * Metodo para limpiar los textField despues de introducir datos
+     */
+    public void cleanAllRegister() {
         
         ISBNLibroRegistroTxtField.setText("");
         TituloLibroRegistroTxtField.setText("");
@@ -2373,7 +2495,10 @@ public void searchAllArticlesAddNotes(){
  
     }
     
-    
+    /**
+     * Metodo para poner los datos de la tabla articulo en los textFields correspondientes
+     * @param evt 
+     */
     private void articModificarModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articModificarModifyBtnActionPerformed
 
         int fila = modifyTable.getSelectedRow();
@@ -2395,6 +2520,9 @@ public void searchAllArticlesAddNotes(){
 
     }//GEN-LAST:event_articModificarModifyBtnActionPerformed
 
+    /**
+     * Metodo para actualizar el registro de un libro
+     */
     public void updateBookModified(){
          int fila = modifyTable.getSelectedRow();
     if ((bookModifyRadioBtn.isSelected())) { 
@@ -2412,13 +2540,16 @@ public void searchAllArticlesAddNotes(){
             }}
     }
     
+    /**
+     * Metodo para actualizar el registro de un articulo
+     */
     public void updateArticleModified(){
     
         int fila = modifyTable.getSelectedRow();
      
         if (articleModifyRadioBtn.isSelected()) {
             if (articTituloModifyTxtField.getText().equals("") | articAutorModifyTxtField.getText().equals("") | articRevistaModifyTxtField.getText().equals("")) {   
-                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos: Titulo y autor");            
+                JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos: Titulo, autor y nombre de la revista");            
             }else{
                 try {
                 PreparedStatement pps = con.prepareStatement("UPDATE Articulo SET ISSN='"+articISSNModifyTxtField.getText()+"',Titulo='"+articTituloModifyTxtField.getText()+"',Autor='"+articAutorModifyTxtField.getText()+"',Nom_revista='"+articRevistaModifyTxtField.getText()+"',Pag_inicio='"+articPiniModifyTxtField.getText()+"',Pag_fin='"+articPFinModifyTxtField.getText()+"',Mes='"+articMesModifyTxtField.getText()+"',Anio='"+articAnioModifyTxtField.getText()+"' WHERE idArticulo='"+modifyTable.getValueAt(fila, 0).toString()+"'");
@@ -2434,18 +2565,40 @@ public void searchAllArticlesAddNotes(){
              
     }
     
-    
+    /**
+     * Metodo para actualizar el registro de un articulo y mostrarlo
+     * @param evt 
+     */
     private void articSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articSaveModifyBtnActionPerformed
+        
+        if(articISSNModifyTxtField.getText().toString().length()>45 | articTituloModifyTxtField.getText().toString().length()>45 | articAutorModifyTxtField.getText().toString().length()>45 | articRevistaModifyTxtField.getText().toString().length()>45 | articPiniModifyTxtField.getText().toString().length()>45 | articPFinModifyTxtField.getText().toString().length()>45 | articMesModifyTxtField.getText().toString().length()>2 | articAnioModifyTxtField.getText().toString().length()>4) {
+            JOptionPane.showMessageDialog(null, "por favor, introduzca valores válidos: ISSN, Titulo, Autor y Revista no pueden ser mayores de 45 caracteres; mes no puede ser mayor de 2 ni año mayor de 4");
+        }else if ((Utilidades.validaString(articAutorModifyTxtField.getText())== false)) {
+            JOptionPane.showMessageDialog(null,"El nombre del autor no puede tener números, por favor, introduzca solo letras.");
+        }else{
         updateArticleModified();
         searchAllArticlesModify();
-      
+        }
     }//GEN-LAST:event_articSaveModifyBtnActionPerformed
 
+    /**
+     * Metodo para actualizar los datos de un libro 
+     * @param evt 
+     */
     private void bookSaveModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookSaveModifyBtnActionPerformed
- 
+       if(bookISBNModifyTxtField.getText().toString().length()>45 | bookTituloModifyTxtField.getText().toString().length()>45 | bookAutorModifyTxtField.getText().toString().length()>45 | bookEditorialModifyTxtField.getText().toString().length()>45 | bookNpagslModifyTxtField.getText().toString().length()>45 | bookAnioModifyTxtField.getText().toString().length()>4) {
+            JOptionPane.showMessageDialog(null, "por favor, introduzca valores válidos: ISBN, Titulo, Autor y Editorial no pueden ser mayores de 45 caracteres; ni año mayor de 4");
+       }else if ((Utilidades.validaString(bookAutorModifyTxtField.getText())== false)) {
+            JOptionPane.showMessageDialog(null,"El nombre del autor no puede tener números, por favor, introduzca solo letras."); 
+       }else{
         updateBookModified();
+       }
     }//GEN-LAST:event_bookSaveModifyBtnActionPerformed
 
+    /**
+     * Metodo para colocar los datos de la tabla en los textField correspondientes
+     * @param evt 
+     */
     private void bookModificarModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookModificarModifyBtnActionPerformed
         
         int fila = modifyTable.getSelectedRow();
@@ -2461,6 +2614,9 @@ public void searchAllArticlesAddNotes(){
         }
     }//GEN-LAST:event_bookModificarModifyBtnActionPerformed
 
+    /**
+     * Metodo para eliminar el articulo seleccionado en la tabla
+     */
     public void deleteRowArticle(){
          int fila = modifyTable.getSelectedRow();
         
@@ -2476,8 +2632,10 @@ public void searchAllArticlesAddNotes(){
             }
         }
 }
-    
-    
+  
+    /**
+     * Metodo para eliminar la nota seleccionada en la tabla
+     */
     public void deleteRowNote(){
          int fila = noteAddTable.getSelectedRow();
         
@@ -2494,6 +2652,9 @@ public void searchAllArticlesAddNotes(){
         }
 }
     
+    /**
+     * Metodo para eliminar el libro seleccionado en la tabla
+     */
     public void deleteRowBook(){
         
         int fila = modifyTable.getSelectedRow();
@@ -2511,17 +2672,28 @@ public void searchAllArticlesAddNotes(){
     
     }
     
+    /**
+     * Metodo para eliminar el articulo y actualizar la tabla
+     * @param evt 
+     */
     private void articDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_articDeleteModifyBtnActionPerformed
             deleteRowArticle();
             searchAllArticlesModify();
     }//GEN-LAST:event_articDeleteModifyBtnActionPerformed
 
+    /**
+     * Metodo para eliminar el libro
+     * @param evt 
+     */
     private void bookDeleteModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookDeleteModifyBtnActionPerformed
             deleteRowBook();
         
     }//GEN-LAST:event_bookDeleteModifyBtnActionPerformed
 
-    
+    /**
+     * Metodo para mostrar los datos en la tabla segun el radiobutton seleccionado
+     * @param evt 
+     */
     private void bookOrArtSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookOrArtSearchBtnActionPerformed
         
         if (articleAddNotaRadioBtn.isSelected()) {
@@ -2533,13 +2705,24 @@ public void searchAllArticlesAddNotes(){
          
     }//GEN-LAST:event_bookOrArtSearchBtnActionPerformed
 
+    /**
+     * Metodo para mostrar las notas en la tabla segun el atributo seleccionado
+     * @param evt 
+     */
     private void searchNotasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchNotasBtnActionPerformed
-       
+       if(searchComboTxtField.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Por favor, introduzca el dato que está buscando"); 
+        }else{
         attribute = allAtributeNotaComboBox.getSelectedItem().toString();
         showNoteTableByAttribute(searchComboTxtField.getText());
         searchComboTxtField.setText("");
+       }
     }//GEN-LAST:event_searchNotasBtnActionPerformed
 
+    /**
+     * Metodo para listar las notas
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  
         DefaultTableModel noteTable = new DefaultTableModel();
@@ -2570,32 +2753,40 @@ public void searchAllArticlesAddNotes(){
      
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Metodo para asociar los libros y artículos a las notas
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        int a, b;
         
         if (bookAddNotaRadioBtn.isSelected()) {
         int fila1 = showLibArtEnNotasTable.getSelectedRow();
         int fila2 = noteAsociarTable.getSelectedRow();
-        String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
-        String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
-        a = Utilidades.validaInt(valor1);
-        b = Utilidades.validaInt(valor2);
-        if (fila1 >=0 && fila2 >= 0) {   
+       String valor1, valor2;
+       
+        if (fila1 >=0 && fila2 >= 0) { 
+            valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
+            valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
+             a = Utilidades.validaInt(valor1);
+             b = Utilidades.validaInt(valor2);
             asociarLibro(a, b);
         }else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro y una nota");
         }}else if(articleAddNotaRadioBtn.isSelected()){
         
            int fila1 = showLibArtEnNotasTable.getSelectedRow();
         int fila2 = noteAsociarTable.getSelectedRow();
-        String valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
-        String valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
+        String valor1, valor2;
+         
+        if (fila1 >=0 && fila2 >= 0) {
+        valor1 = showLibArtEnNotasTable.getValueAt(fila1, 0).toString();
+        valor2 = noteAsociarTable.getValueAt(fila2, 0).toString();
         a = Utilidades.validaInt(valor1);
         b = Utilidades.validaInt(valor2);
-        if (fila1 >=0 && fila2 >= 0) {   
             asociarArticulo(a, b);
         }else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un Actor y una Película");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un articulo y una nota");
         } 
             
         }
@@ -2606,17 +2797,27 @@ public void searchAllArticlesAddNotes(){
         // TODO add your handling code here:
     }//GEN-LAST:event_addNoteTxtFieldActionPerformed
 
+    /**
+     * Metodo para eliminar la nota seleccionada
+     * @param evt 
+     */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         deleteRowNote();
-        
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    /**
+     * Metodo para mostrar las notas en la tabla
+     * @param evt 
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        showNoteTableAddNote();
+     showNoteTableAddNote();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     * Metodo para modificar los datos de una nota
+     * @param evt 
+     */
     private void modifyNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyNoteBtnActionPerformed
      
         int fila = noteAddTable.getSelectedRow();
@@ -2627,22 +2828,30 @@ public void searchAllArticlesAddNotes(){
             addNoteTxtArea.setText(noteAddTable.getValueAt(fila, 2).toString());
        
         }else if ((fila < 0)) {
-            JOptionPane.showMessageDialog(null,"Por favor, seleccione primero un Actor");
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione primero una nota");
         }
- 
-        
     }//GEN-LAST:event_modifyNoteBtnActionPerformed
 
+    /**
+     * Metodo para guardar una nota
+     * @param evt 
+     */
     private void saveNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNoteBtnActionPerformed
-   
+     
             if (addNoteTxtField.getText().equals("") | addNoteTxtArea.getText().equals("")) {
                 JOptionPane.showMessageDialog(null,"Error, por favor, rellene los campos");
+            }else if(addNoteTxtArea.getText().toString().length()>255 | addNoteTxtField.getText().toString().length()> 45){
+                JOptionPane.showMessageDialog(null, "Su nota no puede ser mayor de 255 caracteres ni su tema mayor que 45");
             }else{
                 addNota(addNoteTxtField.getText(), addNoteTxtArea.getText());
         }
         
     }//GEN-LAST:event_saveNoteBtnActionPerformed
-
+    
+    /**
+     * Metodo para actualizar los datos de una nota
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
          int fila = noteAddTable.getSelectedRow();
@@ -2677,6 +2886,10 @@ public void searchAllArticlesAddNotes(){
         // TODO add your handling code here:
     }//GEN-LAST:event_searchComboTxtFieldActionPerformed
 
+    /**
+     * Metodo para buscar las notas de los libros
+     * @param evt 
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
         DefaultTableModel tablaLibro = new DefaultTableModel();
@@ -2715,6 +2928,10 @@ public void searchAllArticlesAddNotes(){
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    /**
+     * Metodo para buscar las notas de los articulos
+     * @param evt 
+     */
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         
         DefaultTableModel tablaLibro = new DefaultTableModel();
@@ -2752,7 +2969,11 @@ public void searchAllArticlesAddNotes(){
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    
+    /**
+     * Metodo para insertar una nota
+     * @param tema String
+     * @param descripcion String
+     */
      private void addNota (String tema,String descripcion) {
         try {  
             CallableStatement cst = con.prepareCall("{CALL insertarNota(?,?)}");
@@ -2766,8 +2987,9 @@ public void searchAllArticlesAddNotes(){
         }      
     }
     
-    
-    
+     /**
+      * Metodo para listar todas las notas
+      */
     public void showNoteTableAddNote() {
             DefaultTableModel tablaNota = new DefaultTableModel();
             tablaNota.addColumn("Id");
@@ -2797,7 +3019,11 @@ public void searchAllArticlesAddNotes(){
         }  
     }
     
-    
+    /**
+     * Metodo para asociar un libro a una nota
+     * @param idN int
+     * @param idL int
+     */
     private void asociarLibro(int idN,int idL) {
         
         String sql = "insert into Libro_tiene_Notas (idNota, idLibro) values ((select idNota from Nota where idNota ='"+idL+"'),(select idLibro from Libro where idLibro = '"+idN +"'))";
@@ -2812,7 +3038,11 @@ public void searchAllArticlesAddNotes(){
             Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    
+    /**
+     * Metodo para asociar una nota a un articulo
+     * @param idN
+     * @param idL 
+     */
     private void asociarArticulo(int idN,int idL) {
         
         String sql = "insert into Articulo_tiene_Notas (idNota, idArticulo) values ((select idNota from Nota where idNota ='"+idL+"'),(select idArticulo from Articulo where idArticulo = '"+idN +"'))";
@@ -2828,32 +3058,6 @@ public void searchAllArticlesAddNotes(){
         }  
     }
  
-    
-  /*  public void selectedTemaAddNota(){
-    
-       // if (temaAddNotaComboBox.getItemAt())) {
-            try {
-                
-                PreparedStatement pps = con.prepareStatement("{call listarTodoTemasOrdenado}");
-                ResultSet rs =  pps.executeQuery();
-                ArrayList<Tema> listaTemas = new ArrayList<>();
-                while (rs.next()) {
-                   
-                  Tema t = new Tema();
-                  t.setIdTema(rs.getInt("idTema"));
-                  t.setTitulo(rs.getString("Titulo"));
-                  listaTemas.add(t);
-             }
-                listaTemas.forEach(listaTema -> temaAddNotaComboBox.addItem(listaTema.getTitulo()));
-           
-                } catch (SQLException ex) {
-                    Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        
-    
-    }*/
-    
-     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2974,6 +3178,7 @@ public void searchAllArticlesAddNotes(){
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
