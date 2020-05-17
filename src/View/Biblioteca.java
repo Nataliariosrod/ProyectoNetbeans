@@ -2897,18 +2897,15 @@ public class Biblioteca extends javax.swing.JFrame {
         
         DefaultTableModel tablaLibro = new DefaultTableModel();
             tablaLibro.addColumn("IdLibro");
-            tablaLibro.addColumn("Titulo");
-            tablaLibro.addColumn("Autor");
-            tablaLibro.addColumn("idNota");
-            tablaLibro.addColumn("Tema");
-            tablaLibro.addColumn("Descripcion ");
+            tablaLibro.addColumn("IdNota");
             
             
             showLibArtEnNotasTable.setModel(tablaLibro);
             
-            String sql = "{call buscarTodasNotasDeLibros}";
+            String sql = "SELECT * FROM Libro_tiene_Notas";
+            //String sql = "{call buscarTodasNotasDeLibros}";
             
-            String datos [] = new String [7];
+            String datos [] = new String [2];
             
         try {   
             Statement st = con.createStatement();
@@ -2916,10 +2913,7 @@ public class Biblioteca extends javax.swing.JFrame {
             while (rs.next()) {
                 datos [0] = rs.getString(1);
                 datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                datos [5] = rs.getString(6);
+                ;
                
                 tablaLibro.addRow(datos);
             } 
@@ -2939,18 +2933,15 @@ public class Biblioteca extends javax.swing.JFrame {
         
         DefaultTableModel tablaLibro = new DefaultTableModel();
             tablaLibro.addColumn("IdArticulo");
-            tablaLibro.addColumn("Titulo");
-            tablaLibro.addColumn("Autor");
-            tablaLibro.addColumn("idNota");
-            tablaLibro.addColumn("Tema");
-            tablaLibro.addColumn("Descripcion ");
+            tablaLibro.addColumn("IdNota");
+     
             
             noteAsociarTable.setModel(tablaLibro);
-            
+            String sql = "SELECT * FROM Articulo_tiene_Notas";
             //String sql = ("SELECT Articulo_tiene_Notas.idArticulo, Articulo.titulo, Articulo.autor, Articulo_tiene_Notas.idNota, Nota.tema, Nota.descripcion FROM Articulo, Articulo_tiene_Notas, Nota WHERE Articulo_tiene_Notas.idArticulo = Articulo.idArticulo");
-            String sql = ("{call buscarTodasNotasArticulos}");
+            //String sql = ("{call buscarTodasNotasArticulos}");
             
-            String datos [] = new String [6];
+            String datos [] = new String [2];
             
         try {   
             Statement st = con.createStatement();
@@ -2958,10 +2949,7 @@ public class Biblioteca extends javax.swing.JFrame {
             while (rs.next()) {
                 datos [0] = rs.getString(1);
                 datos [1] = rs.getString(2);
-                datos [2] = rs.getString(3);
-                datos [3] = rs.getString(4);
-                datos [4] = rs.getString(5);
-                datos [5] = rs.getString(6);
+          
                
                 tablaLibro.addRow(datos);
             } 
