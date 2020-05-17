@@ -13,25 +13,23 @@ import java.sql.*;
  */
 
 public class ConexionBD {
-
-  private final String db = "mydb";
+   /** nombre base de datos*/
+  private final String db = "nrios_biblioteca";
   /** usuario */
-  private final String user = "root";
+  private final String user = "nrios";
   /** contraseña de MySql*/
-  private final String password = "quequieres";
+  private final String password = "Nervion1**";
   /** Cadena de conexion */
-  private String url = "jdbc:mysql://localhost:3306/" + db;
+  private String url = "jdbc:mysql://nrios.salesianas.es/" + db;
 
   /** variable para trabajar con la conexion a la base de datos */
   private Connection connection = null;
   
+  /** variable para comprobar si la conexion es correcta*/
   private String exito;
-
-  
-  
    /** Constructor de clase */
    public ConexionBD(){
-         this.url = "jdbc:mysql://localhost:3306/" + db;
+         this.url = "jdbc:mysql://nrios.salesianas.es/" + db;
        try{
          //obtenemos el driver de para mysql
          Class.forName("com.mysql.jdbc.Driver");
@@ -46,7 +44,10 @@ public class ConexionBD {
       }
    }
    
-   
+   /**
+    * getters y setters
+    * @return connection Connection, exito String
+    */
    public Connection getConexion() {
     return this.connection;
    }

@@ -499,7 +499,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de paginas"/>
+                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de p&#xe1;ginas"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel17">
@@ -758,7 +758,7 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="ArticuloSearchRadioBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Articulos"/>
+                    <Property name="text" type="java.lang.String" value="Art&#xed;culos"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ArticuloSearchRadioBtnActionPerformed"/>
@@ -1134,7 +1134,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel30">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Titulo"/>
+                    <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel31">
@@ -1149,12 +1149,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel33">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pagina de inicio"/>
+                    <Property name="text" type="java.lang.String" value="P&#xe1;gina de inicio"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel34">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pagina de fin"/>
+                    <Property name="text" type="java.lang.String" value="P&#xe1;gina de fin"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel35">
@@ -1243,7 +1243,7 @@
                 <Component class="javax.swing.JRadioButton" name="articleModifyRadioBtn">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Articulo"/>
+                    <Property name="text" type="java.lang.String" value="Art&#xed;culo"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="articleModifyRadioBtnActionPerformed"/>
@@ -1371,7 +1371,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel46">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Titulo"/>
+                    <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
@@ -1386,7 +1386,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel49">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Numero de paginas"/>
+                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de p&#xe1;ginas"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel50">

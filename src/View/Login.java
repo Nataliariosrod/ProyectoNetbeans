@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Nata
+ * @author Natalia
  */
 public class Login extends javax.swing.JFrame {
 
@@ -23,6 +23,9 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    /**
+     * Variables para el ingreso al programa
+     */
     private final String usuarioUsuario = "Usuario";
     private final String usuarioAdmin = "usuario";
     private final String password = "contraseña";
@@ -39,10 +42,10 @@ public class Login extends javax.swing.JFrame {
         loginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         userTxtField = new javax.swing.JTextField();
-        pwTxtField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
+        pwTxtField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +76,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        pwTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwTxtFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
@@ -89,8 +98,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(32, 32, 32)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pwTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(userTxtField))))
+                            .addComponent(userTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(pwTxtField))))
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -107,10 +116,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(userTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(40, 40, 40)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(pwTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(loginBtn)
                 .addGap(27, 27, 27))
         );
@@ -139,6 +148,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userTxtFieldActionPerformed
 
+    /**
+     * Metodo para crear el login
+     * @param evt 
+     */
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         
          int login;
@@ -159,6 +172,10 @@ public class Login extends javax.swing.JFrame {
         }
               
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void pwTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwTxtFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,7 +218,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginBtn;
     private javax.swing.JPanel loginPanel;
-    private javax.swing.JTextField pwTxtField;
+    private javax.swing.JPasswordField pwTxtField;
     private javax.swing.JTextField userTxtField;
     // End of variables declaration//GEN-END:variables
 }
